@@ -10,6 +10,25 @@ CREATE TABLE `user` (
   CONSTRAINT `user_usertype_FK` FOREIGN KEY (`Type`) REFERENCES `usertype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO animalloverssociety.`user`
+(UserName, Password, id, `Type`)
+VALUES('sajjad', 'sajjadin', 1, 1);
+INSERT INTO animalloverssociety.`user`
+(UserName, Password, id, `Type`)
+VALUES('alex', 'alexin', 2, 1);
+INSERT INTO animalloverssociety.`user`
+(UserName, Password, id, `Type`)
+VALUES('employee1', 'employee1', 3, 2);
+INSERT INTO animalloverssociety.`user`
+(UserName, Password, id, `Type`)
+VALUES('employee2', 'employee2', 4, 2);
+INSERT INTO animalloverssociety.`user`
+(UserName, Password, id, `Type`)
+VALUES('donor1', 'donor1', 5, 3);
+INSERT INTO animalloverssociety.`user`
+(UserName, Password, id, `Type`)
+VALUES('donor1', 'donor1', 6, 3);
+
 -- animalloverssociety.usertype definition
 
 CREATE TABLE `usertype` (
@@ -18,58 +37,15 @@ CREATE TABLE `usertype` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO animalloverssociety.usertype
+(id, `Type`)
+VALUES(1, 'Management');
+INSERT INTO animalloverssociety.usertype
+(id, `Type`)
+VALUES(2, 'Employee');
+INSERT INTO animalloverssociety.usertype
+(id, `Type`)
+VALUES(3, 'Donor');
 
 -- animalloverssociety.customers definition
 
@@ -85,9 +61,9 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO animalloverssociety.customers (FirstName,LastName,StreetAddress,City,Province,PostalCode) VALUES
-	 ('Joel','Miller','130 Yonge St','Toronto','ON','M4C1B5'),
-	 ('Roman','Roy','2350 Dundas St','Toronto','ON','M4B2J8'),
-	 ('Sydney','Adamu','1562 Granville St','Vancouver','BC','V6H3J1');
+	 (1,'Joel','Miller','130 Yonge St','Toronto','ON','M4C1B5'),
+	 (2,'Roman','Roy','2350 Dundas St','Toronto','ON','M4B2J8'),
+	 (3,'Sydney','Adamu','1562 Granville St','Vancouver','BC','V6H3J1');
 
 -- animalloverssociety.sales definition
 
@@ -102,10 +78,10 @@ CREATE TABLE `sales` (
   CONSTRAINT `sales_customers_FK` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO animalloverssociety.sales (ProductID,Quantity,CustomerID,`Date`) VALUES
-	 (1,1,2,'2024-01-16'),
-	 (4,2,3,'2024-02-04'),
-	 (3,1,1,'2024-01-25');
+INSERT INTO animalloverssociety.sales (SaleID, ProductID,Quantity,CustomerID,Date) VALUES
+	 (1,1,1,2,'2024-01-16'),
+	 (2,4,2,3,'2024-02-04'),
+	 (3,3,1,1,'2024-01-25');
 
 -- animalloverssociety.seminars definition
 
@@ -123,7 +99,7 @@ INSERT INTO animalloverssociety.seminars (Title,`Date`,`Time`,Location,Capacity)
 	 ('Responsible small pet ownership','2024-06-15','10:00:00','Online',100),
 	 ('Trap Neuter Return program','2024-05-25','14:00:00','Toronto Reference Library',50),
 	 ('Behavioural enrichment for dogs','2024-05-18','15:00:00','Cecil Community Centre',30);
-=======
+
 -- animalloverssociety.donations definition - AP
 
 CREATE TABLE `donations` (
