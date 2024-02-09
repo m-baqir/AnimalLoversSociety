@@ -152,3 +152,18 @@ VALUES(4, 'shirt', 20.0, 5.0, 0.0, 45);
 INSERT INTO animalloverssociety.items
 (itemCode, itemType, salePrice, cost, profit, inventory)
 VALUES(5, 'sculpture', 50.0, 30.0, 0.0, 20);
+
+-- Donors --
+CREATE TABLE Donors(
+	name VARCHAR(30),
+	address VARCHAR(100),
+	gender VARCHAR(10),
+	donation INT,
+	name_change VARCHAR(30),
+	member VARCHAR(5)
+);
+INSERT INTO Donors VALUES('Arsh', 'Brampton, Canada ON', 'Male', 5000, 'No', 'Yes');
+INSERT INTO Donors VALUES('Alexander', 'Toronto, Canada ON', 'Male', 10000, 'No', 'Yes');
+INSERT INTO Donors VALUES('Sajjad', 'Milton, Canada ON', 'Male', 8000, 'No', 'Yes');
+INSERT INTO Donors VALUES('Emily', 'Calagary, Canada', 'Female', 2000, 'No', 'Yes');
+INSERT INTO Donors VALUES('Jane', 'Washington, USA', 'Female', 50, 'No', 'No');
