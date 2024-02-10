@@ -153,6 +153,25 @@ INSERT INTO animalloverssociety.items
 (itemCode, itemType, salePrice, cost, profit, inventory)
 VALUES(5, 'sculpture', 50.0, 30.0, 0.0, 20);
 
+-- animalloverssociety.employees definition
+
+CREATE TABLE `employees` (
+	`employeeID` int NOT NULL AUTO_INCREMENT,
+	`employeeName` varchar(50) NOT NULL,
+	`title` varchar(40) NOT NULL,
+	`salary` int NOT NULL,
+	`department` varchar(40) NOT NULL,
+	`supervisor` varchar(40) NOT NULL,
+	`project` varchar(40) NOT NULL,
+	PRIMARY KEY (`employeeID`)	
+)	ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO animalloverssociety.employees (employeeName, title, salary, department, supervisor, project) VALUES
+	(1, 'John Cater', 'Development Officer', 120000, 'Production', 'Amy Wiseman', 'AGOC'),
+	(2, 'Clement Guban', 'Digital Fundraising Coordinator', 80000, 'Marketing', 'Lori Hedge', 'DFAS'),
+	(3, 'Rose Golding', 'Veterinarian', 220000, 'VA', 'Daniel Hugh', 'AGOC'),
+	(4, 'Omar Hans', 'HR Coordinator', 65000, 'Talent Acquisition', 'Zeya Romans', 'OLNO');
+
 -- Donors --
 CREATE TABLE Donors(
 	name VARCHAR(30),
