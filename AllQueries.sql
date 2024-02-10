@@ -166,8 +166,8 @@ CREATE TABLE `employees` (
 	PRIMARY KEY (`employeeID`)	
 )	ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO animalloverssociety.employees (employeeName, title, salary, department, supervisor, project) VALUES
-	(1, 'John Cater', 'Development Officer', 120000, 'Production', 'Amy Wiseman', 'AGOC'),
+INSERT INTO animalloverssociety.employees (employeeID ,employeeName, title, salary, department, supervisor, project) VALUES
+	(1,'John Cater','Development Officer',120000, 'Production', 'Amy Wiseman', 'AGOC'),
 	(2, 'Clement Guban', 'Digital Fundraising Coordinator', 80000, 'Marketing', 'Lori Hedge', 'DFAS'),
 	(3, 'Rose Golding', 'Veterinarian', 220000, 'VA', 'Daniel Hugh', 'AGOC'),
 	(4, 'Omar Hans', 'HR Coordinator', 65000, 'Talent Acquisition', 'Zeya Romans', 'OLNO');
