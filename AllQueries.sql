@@ -184,5 +184,5 @@ CREATE TABLE Donors(
 INSERT INTO Donors VALUES('Arsh', 'Brampton, Canada ON', 'Male', 5000, 'No', 'Yes');
 INSERT INTO Donors VALUES('Alexander', 'Toronto, Canada ON', 'Male', 10000, 'No', 'Yes');
 INSERT INTO Donors VALUES('Sajjad', 'Milton, Canada ON', 'Male', 8000, 'No', 'Yes');
-INSERT INTO Donors VALUES('Emily', 'Calagary, Canada', 'Female', 2000, 'No', 'Yes');
+INSERT INTO Donors VALUES('Emily', 'Calgary, Canada', 'Female', 2000, 'No', 'Yes');
 INSERT INTO Donors VALUES('Jane', 'Washington, USA', 'Female', 50, 'No', 'No');
