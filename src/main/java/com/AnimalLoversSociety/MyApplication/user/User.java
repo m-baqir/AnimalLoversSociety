@@ -1,9 +1,12 @@
 package com.AnimalLoversSociety.MyApplication.user;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import com.AnimalLoversSociety.MyApplication.user.Enums.Role;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +19,17 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private int userType;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public User() {
+    }
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = Role.valueOf(role);
+    }
 
     public Long getId() {
         return id;
@@ -42,11 +55,11 @@ public class User {
         this.password = password;
     }
 
-    public int getUserType() {
-        return userType;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserType(int userType) {
-        this.userType = userType;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
