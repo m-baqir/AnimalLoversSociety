@@ -1,6 +1,9 @@
 package com.AnimalLoversSociety.MyApplication.items;
 
+import com.AnimalLoversSociety.MyApplication.sales.Sale;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity // turns object into something that can be used with sql table
@@ -28,6 +31,9 @@ public class Items {
 
     @Column
     private double profit;
+
+    @OneToMany(mappedBy = "item")
+    private List<Sale> sales;
 
     public Items() {
     }
