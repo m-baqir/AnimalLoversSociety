@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Items</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <h1>Items and Inventory</h1>
+    <h3><a th:href="@{/items/inventory}">Inventory</a></h3>
+    <h3><a th:href="@{/items_create}">Add new Item</a></h3>
+    <h3><a th:href="@{/items/manage}">Manage Items</a></h3>
+    <h3><a th:href="@{/items/delete}">Delete Item</a></h3>
+    <h3><a th:href="@{/}">Return to Homepage</a></h3>
+</div>
+</body>
+</html>

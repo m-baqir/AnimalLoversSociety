@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Items</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<br>
+<div class = "container">
+    <div class = "col">
+        <h1>Items</h1>
+    </div>
+    <div class = "col text-right">
+        <a th:href = "@{/items_create}" class>
+            <button type = "button" class = "btn btn-primary">Add Item</button></a>
+    </div>
+</div>
+<table class = "table">
+    <thead class = "dark">
+    <tr>
+        <th>Item Code</th>
+        <th>Item Type</th>
+        <th>Sale Price</th>
+        <th>Cost</th>
+        <th>inventory</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.itemType}"></td>
+        <td th:text="${item.getSalePrice()}"></td>
+        <td th:text="${item.cost}"></td>
+        <td th:text="${item.inventory}"></td>
+        <td>
+            <a th:href = "@{/items}">
+                <button type = "button" class = "btn btn-outline-secondary">Edit</button></a>
+
+            <a th:href = "@{/items}">
+                <button type = "button" class = "btn btn-outline-danger">Delete</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

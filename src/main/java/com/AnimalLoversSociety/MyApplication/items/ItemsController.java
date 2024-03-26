@@ -1,73 +1,97 @@
 package com.AnimalLoversSociety.MyApplication.items;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RestController
+@Controller
 public class ItemsController {
 
     @Autowired
     private ItemsRepository itemRepo;
 
-    /*
-     * @PostMapping(path="/add")
-     * public @ResponseBody String addNewItem (@RequestParam int
-     * itemCode, @RequestParam String itemType, @RequestParam double
-     * salePrice, @RequestParam double cost, @RequestParam long inventory) {
-     * Items n = new Items();
-     * n.setId(itemCode);
-     * n.setItemType(itemType);
-     * n.setSalePrice(salePrice);
-     * n.setCost(cost);
-     * n.setInventory(inventory);
-     * return "Saved";
-     * }
-     */
+    @GetMapping("/items_create")
+    public String showItemCreateForm(Model model) {
+        model.addAttribute("item", new Items());
 
-    // @PostMapping(path="/add")
-    // Test method to entering a url to activate a method to create a new entry to
-    // the items table
-    // http://localhost:8080/test/{itemCode}/
-    @RequestMapping(value = "/test/{itemCode}", method = { RequestMethod.POST, RequestMethod.GET })
-    public @ResponseBody String addNewItem(@PathVariable long itemCode) {
-        Items n = new Items();
-        n.setId(itemCode);
-        n.setItemType("TEST");
-        n.setSalePrice(88);
-        n.setCost(88);
-        n.setInventory(888);
-        itemRepo.save(n);
-        return "Saved";
+        return "items_create";
     }
 
-    // Test method to entering a url to activate a method to delete entry from the
-    // items table
-    // http://localhost:8080/test/de/{itemCode}/
-    @RequestMapping(value = "/test/del/{itemCode}", method = { RequestMethod.POST, RequestMethod.GET })
-    public @ResponseBody String removeItem(@PathVariable long itemCode) {
-        itemRepo.deleteById(itemCode);
-        return "Deleted";
+    @GetMapping("/items")
+    public String viewItemsPage() {
+        return "/items";
     }
 
-    // http://localhost:8080/all will show all the entries in the items table
-    @GetMapping(path = "/allitems")
-    public Iterable<Items> getAllItems() {
-        return itemRepo.findAll();
+    /*@RequestMapping(value = "/items/add", method = { RequestMethod.POST, RequestMethod.GET })
+    public String addNewItem(Items item) {
+        item.setItemType(item.getItemType());
+        item.setSalePrice(item.getSalePrice());
+        item.setCost(item.getCost());
+        item.setInventory(item.getInventory());
+
+        itemRepo.save(item);
+        return "item_created";
+    }*/
+
+    //@GetMapping (path="items/add")
+    @RequestMapping(value = "/items/add", method = { RequestMethod.POST, RequestMethod.GET })
+    public String showAddItemPage(Items item) {
+        item.setItemType(item.getItemType());
+        item.setSalePrice(item.getSalePrice());
+        item.setCost(item.getCost());
+        item.setInventory(item.getInventory());
+
+        itemRepo.save(item);
+        return "items_create";
     }
 
-    // http://localhost:8080/hi will take you to a blank html page that says hello
-    @GetMapping(path = "/hi")
-    public String helloWorld() {
-        return "Hello";
+    @PostMapping("/items")
+    public String saveItem(@ModelAttribute("items") Items item) {
+        itemRepo.save(item);
+        return "redirect:/items";
     }
 
-    // http://localhost:8080/all/{id}/ will show you a specific entry in the items
-    // table based on itemCode
-    @GetMapping(path = "/allitems/{id}")
-    public Optional<Items> show(@PathVariable String id) {
-        long itemId = Long.parseLong(id);
-        return itemRepo.findById(itemId);
+    // http://localhost:8080/items/inventory will show all the entries in the items table
+    @GetMapping(path = "/items/inventory")
+    public String allItems(Model model) {
+
+        model.addAttribute("items", itemRepo.findAll());
+        return "inventory"; // return the name of the view
     }
+
+    @GetMapping(path = "/items/manage")
+    public String showManageItemPage(Model model) {
+        model.addAttribute("items", itemRepo.findAll());
+        return "items_manage";
+    }
+
+    @GetMapping(path = "/items/edit/{itemId}")
+    public String showEditItemPage(@PathVariable String itemId, Model model) {
+        long id = Long.parseLong(itemId);
+        model.addAttribute("items", itemRepo.findById(id));
+        return "items_edit";
+    }
+
+    @PostMapping("/items/edit/{itemId}")
+    public String editItem(@PathVariable String itemId, @ModelAttribute("item") Items item, Model model) {
+        long id = Long.parseLong(itemId);
+        // Get seminar from database by id
+        Items existingItem = itemRepo.findById(id).get();
+
+        // Update the info
+        existingItem.setId(id);
+        existingItem.setItemType(item.getItemType());
+        existingItem.setSalePrice(item.getSalePrice());
+        existingItem.setCost(item.getCost());
+        existingItem.setInventory(item.getInventory());
+
+        // Save updated seminar object
+        itemRepo.save(existingItem);
+        return "redirect:/items/manage";
+    }
+
+
 }
