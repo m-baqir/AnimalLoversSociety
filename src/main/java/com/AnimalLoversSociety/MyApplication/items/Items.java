@@ -9,10 +9,15 @@ import jakarta.persistence.*;
 @DiscriminatorValue("0") // int differentiator
 @Table(name = "items") // looks for items table, if doesn't exist it creates it to the database
 public class Items {
+
+
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY) - this is supposed to autogenerate a number everytime object is created, but was having trouble getting to work
-    @Column(name="itemCode") // attaches itemCode variable to item_code column in items table
-    private long itemCode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //- this is supposed to autogenerate a number everytime object is created, but was having trouble getting to work
+
+    public long id;
+
+    //@Column // attaches itemCode variable to item_code column in items table
+    //private long itemCode;
 
     @Column(nullable = false) // sets the item_type column to not nullable
     private String itemType;
@@ -33,18 +38,18 @@ public class Items {
     }
 
     //test constructor
-    public Items(long itemCode) {
-        this.itemCode = itemCode;
+    /*public Items(long itemCode) {
+       // this.itemCode = itemCode;
         itemType = "TEST";
         salePrice = 10000;
         cost = 10000;
         inventory = 1000;
 
-    }
+    }*/
 
     //specific constructor
-    public Items(long itemCode, String itemType, double salePrice, double cost, long inventory) {
-        this.itemCode = itemCode;
+    public Items(/*long itemCode,*/ String itemType, double salePrice, double cost, long inventory) {
+       // this.itemCode = itemCode;
         this.itemType = itemType;
         this.salePrice = salePrice;
         this.cost = cost;
@@ -55,13 +60,13 @@ public class Items {
     }
 
     //setters and getters for items
-    public void setId(long itemCode) {
+   /* public void setId(long itemCode) {
         this.itemCode = itemCode;
     }
 
     public long getId() {
         return itemCode;
-    }
+    }*/
 
     public String getItemType() {
         return itemType;
@@ -93,5 +98,13 @@ public class Items {
 
     public void setInventory(long inventory) {
         this.inventory = inventory;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

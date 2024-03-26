@@ -15,7 +15,7 @@ public class Sculptures extends Items {
     private double height;
 
     Sculptures(double weight, double height) {
-        super(1111, "Sculpture", 1111, 1111, 1111);
+        super(/*1111,*/ "Sculpture", 1111, 1111, 1111);
         this.weight = weight;
         this.height = height;
 

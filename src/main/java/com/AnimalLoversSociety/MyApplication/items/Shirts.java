@@ -14,7 +14,7 @@ public class Shirts extends Items {
     private String size;
 
     Shirts(String colour, String size) {
-        super(4312, "Shirt", 1234, 1234, 1234);
+        super(/*4312,*/ "Shirt", 1234, 1234, 1234);
         this.colour = colour;
         this.size = size;
 
