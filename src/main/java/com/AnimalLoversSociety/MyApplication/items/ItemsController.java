@@ -68,18 +68,21 @@ public class ItemsController {
         return "items_manage";
     }
 
-    @GetMapping(path = "/items/edit")
-    public String showEditItemPage(@PathVariable long id, Model model) {
+    @GetMapping(path = "/items/edit/{itemId}")
+    public String showEditItemPage(@PathVariable String itemId, Model model) {
+        long id = Long.parseLong(itemId);
         model.addAttribute("items", itemRepo.findById(id));
         return "items_edit";
     }
+
     @PostMapping("/items/edit/{itemId}")
-    public String editItem(@PathVariable long itemId, @ModelAttribute("item") Items item, Model model) {
+    public String editItem(@PathVariable String itemId, @ModelAttribute("item") Items item, Model model) {
+        long id = Long.parseLong(itemId);
         // Get seminar from database by id
-        Items existingItem = itemRepo.findById(itemId).get();
+        Items existingItem = itemRepo.findById(id).get();
 
         // Update the info
-        existingItem.setId(itemId);
+        existingItem.setId(id);
         existingItem.setItemType(item.getItemType());
         existingItem.setSalePrice(item.getSalePrice());
         existingItem.setCost(item.getCost());

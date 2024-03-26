@@ -8,14 +8,26 @@
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<table>
-    <thead>
+
+<br>
+<div class = "container">
+    <div class = "col">
+        <h1>Items</h1>
+    </div>
+    <div class = "col text-right">
+        <a th:href = "@{/items_create}" class>
+            <button type = "button" class = "btn btn-primary">Add Item</button></a>
+    </div>
+</div>
+<table class = "table">
+    <thead class = "dark">
     <tr>
         <th>Item Code</th>
         <th>Item Type</th>
         <th>Sale Price</th>
         <th>Cost</th>
         <th>inventory</th>
+        <th>actions</th>
     </tr>
     </thead>
     <tbody>
@@ -25,12 +37,12 @@
         <td th:text="${item.getSalePrice()}"></td>
         <td th:text="${item.cost}"></td>
         <td th:text="${item.inventory}"></td>
-<!--        <td>-->
-<!--            <a th:href = "@{/items/edit/{itemId}(itemId=${items.id})}">-->
-<!--                <button type = "button" class = "btn btn-outline-secondary">Edit</button></a>-->
+        <td>
+            <a th:href = "@{/items}">
+                <button type = "button" class = "btn btn-outline-secondary">Edit</button></a>
 
-<!--            <a th:href = "@{/items/del/{itemId}(itemId=${items.id})}">-->
-<!--                <button type = "button" class = "btn btn-outline-danger">Delete</button></a>-->
+            <a th:href = "@{/items}">
+                <button type = "button" class = "btn btn-outline-danger">Delete</button></a>
         </td>
     </tr>
     </tbody>
