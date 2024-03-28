@@ -8,42 +8,84 @@ public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "employeeData")
+    private int employeeData;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "employeeID")
+    private int employeeID;
 
-    @Column(nullable = false)
+    @Column(name = "employeeName", nullable = false)
+    private String employeeName;
+
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "salary", nullable = false)
+    private int salary;
+
+    @Column(name = "department", nullable = false)
     private String department;
 
-    @Column(nullable = false)
+    @Column(name = "supervisor", nullable = false)
+    private String supervisor;
+
+    @Column(name = "project", nullable = false)
     private String project;
 
     // Constructors
     public Employees() {
     }
 
-    public Employees(String name, String department, String project) {
-        this.name = name;
+    public Employees(int employeeID, String employeeName, String title, int salary, String department, String supervisor, String project) {
+        this.employeeID = employeeID;
+        this.employeeName = employeeName;
+        this.title = title;
+        this.salary = salary;
         this.department = department;
+        this.supervisor = supervisor;
         this.project = project;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+
+    public int getEmployeeData() {
+        return employeeData;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEmployeeData(int employeeData) {
+        this.employeeData = employeeData;
     }
 
-    public String getName() {
-        return name;
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public String getDepartment() {
@@ -52,6 +94,14 @@ public class Employees {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(String supervisor) {
+        this.supervisor = supervisor;
     }
 
     public String getProject() {
