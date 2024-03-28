@@ -135,21 +135,26 @@ INSERT INTO animalloverssociety.seminars (Title,`Date`,`Time`,Location,Capacity,
 -- animalloverssociety.employees definition
 
 CREATE TABLE `employees` (
-	`employeeID` int NOT NULL AUTO_INCREMENT,
+	`employeeData` int NOT NULL AUTO_INCREMENT,
+	`employeeID` int NOT NULL,
 	`employeeName` varchar(50) NOT NULL,
 	`title` varchar(40) NOT NULL,
 	`salary` int NOT NULL,
 	`department` varchar(40) NOT NULL,
 	`supervisor` varchar(40) NOT NULL,
 	`project` varchar(40) NOT NULL,
-	PRIMARY KEY (`employeeID`)	
+	PRIMARY KEY (`employeeData`)	
 )	ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO animalloverssociety.employees (employeeID ,employeeName, title, salary, department, supervisor, project) VALUES
-	(1,'John Cater','Development Officer',120000, 'Production', 'Amy Wiseman', 'AGOC'),
-	(2, 'Clement Guban', 'Digital Fundraising Coordinator', 80000, 'Marketing', 'Lori Hedge', 'DFAS'),
-	(3, 'Rose Golding', 'Veterinarian', 220000, 'VA', 'Daniel Hugh', 'AGOC'),
-	(4, 'Omar Hans', 'HR Coordinator', 65000, 'Talent Acquisition', 'Zeya Romans', 'OLNO');
+INSERT INTO animalloverssociety.employees (employeeData, employeeID ,employeeName, title, salary, department, supervisor, project) VALUES
+	(1, 1,'John Cater','Development Officer',120000, 'Production', 'Amy Wiseman', 'AGOC'),
+	(2, 2, 'Clement Guban', 'Digital Fundraising Coordinator', 80000, 'Marketing', 'Lori Hedge', 'DFAS'),
+	(3, 3, 'Rose Golding', 'Veterinarian', 220000, 'VA', 'Daniel Hugh', 'AGOC'),
+	(4, 4, 'Omar Hans', 'HR Coordinator', 65000, 'Talent Acquisition', 'Zeya Romans', 'OLNO'),
+    (5, 5, 'Amy Wiseman', 'Project Manager', 150000, 'Production', 'Zeina Fallsman', 'AGOC'),
+    (6, 5, 'Amy Wiseman', 'Project Manager', 150000, 'Production', 'Zeina Fallsman', 'DFAS'),
+    (7, 5, 'Amy Wiseman', 'Project Manager', 150000, 'Production', 'Zeina Fallsman', 'OLNO'),
+    (8, 4, 'Omar Hans', 'HR Coordinator', 65000, 'Talent Acquisition', 'Zeya Romans', 'AGOC');
 
 -- Donors --
 CREATE TABLE `donors`(
