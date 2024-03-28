@@ -19,10 +19,10 @@ public class SaleConfig {
         return args -> {
 
             Items item1 = new Items(
-                    555, "book", 20, 16, 300
+                    "book", 20, 16, 300
             );
             Items item2 = new Items(
-                    556, "video", 15, 12, 300
+                    "video", 15, 12, 300
             );
             itemsRepository.saveAll(List.of(item1, item2));
 
