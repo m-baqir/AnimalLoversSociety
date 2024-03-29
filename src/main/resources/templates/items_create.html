@@ -18,6 +18,17 @@
                 <form th:action="@{/items}" th:object="${item}"
                       method="post" style="max-width: 600px; margin: 0 auto;">
                     <div class = "form-group">
+                        <label>Item Name</label>
+                        <input
+                                type = "text"
+                                name = "Item Name"
+                                th:field = "*{name}"
+                                class = "form-control"
+                                placeholder="Enter item name"
+                                required
+                        />
+                    </div>
+                    <div class = "form-group">
                         <label>Item Type</label>
                         <input
                                 type = "text"
@@ -33,6 +44,7 @@
                         <label>Price</label>
                         <input
                                 type = "number"
+                                step = "0.01"
                                 name = "Sale Price"
                                th:field = "*{salePrice}"
                                 class = "form-control"
@@ -45,6 +57,7 @@
                         <label>Cost</label>
                         <input
                                 type = "number"
+                                step = "0.01"
                                 name = "cost"
                                 th:field = "*{cost}"
                                 class = "form-control"

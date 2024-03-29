@@ -16,7 +16,7 @@
         <h1>Manage Items</h1>
     </div>
     <div class = "col text-right">
-        <a th:href = "@{/items_create}" class>
+        <a th:href = "@{/items/create}" class>
             <button type = "button" class = "btn btn-primary">Add Item</button></a>
         <a th:href = "@{/items}">
             <button type = "button" class = "btn btn-outline-danger">Items Homepage</button></a>
@@ -39,14 +39,14 @@
     <tbody>
     <tr th:each="item : ${items}">
         <td style="text-align:right" th:text="${item.id}"></td>
-        <td th:text="placeholder"></td>
+        <td th:text="${item.name}"></td>
         <td th:text="${item.itemType}"></td>
         <td style="text-align:right" th:text="${item.getSalePrice()}"></td>
         <td style="text-align:right" th:text="${item.cost}"></td>
         <td style="text-align:right" th:text="${item.profit}"></td>
         <td style="text-align:right" th:text="${item.inventory}"></td>
         <td style="text-align:right" >
-            <a th:href = "@{/items}">
+            <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
                 <button type = "button" class = "btn btn-outline-secondary">Reorder</button></a>
 
             <a th:href = "@{/items/edit/{id}(id=${item.id})}">

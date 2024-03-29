@@ -13,7 +13,7 @@ public class ItemsController {
     @Autowired
     private ItemsRepository itemRepo;
 
-    @GetMapping("/items_create")
+    @GetMapping("/items/create")
     public String showItemCreateForm(Model model) {
         model.addAttribute("item", new Items());
 
@@ -39,6 +39,7 @@ public class ItemsController {
 
     @PostMapping("/items")
     public String saveItem(@ModelAttribute("items") Items item) {
+        item.setProfit(item.getSalePrice() - item.getCost());
         itemRepo.save(item);
         return "redirect:/items";
     }
@@ -110,6 +111,20 @@ public class ItemsController {
 
         // Save updated seminar object
         itemRepo.save(existingItem);
+        return "redirect:/items/inventory";
+    }
+
+    @GetMapping(path = "/items/reorder/received/{itemId}")
+    public String reorderReceived(@PathVariable String itemId) {
+        long id = Long.parseLong(itemId);
+        Items item = itemRepo.findById(id).get();
+        item.setId(id);
+        item.setInventory(item.getInventory() + item.getInventoryOnReorder());
+        item.setInventoryOnReorder(0);
+        item.setReplenishArrivalDate(null);
+        item.setReplenishOrderedDate(new Date());
+
+        itemRepo.save(item);
         return "redirect:/items/inventory";
     }
 

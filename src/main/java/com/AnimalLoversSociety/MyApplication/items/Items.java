@@ -39,6 +39,8 @@ public class Items {
     @Column
     private long inventoryOnReorder;
 
+
+
     @Column
     private double profit;
 
@@ -106,6 +108,10 @@ public class Items {
     }
     public double getProfit() {
         return profit;
+    }
+
+    public void setProfit(double profit) {
+        this.profit = profit;
     }
 
     public Date getReplenishOrderedDate() {

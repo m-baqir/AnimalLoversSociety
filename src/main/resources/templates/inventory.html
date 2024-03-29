@@ -48,7 +48,7 @@
             <td>
                 <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
                     <button type = "button" class = "btn btn-primary">Reorder</button></a>
-                <a th:href = "@{/items}" onclick="return confirm('Confirm Reorder Received')">
+                <a th:href = "@{/items/reorder/received/{id}(id=${item.id})}" onclick="return confirm('Confirm Reorder Received')">
                     <button type = "button" class = "btn btn-outline-secondary">Reorder Received</button></a>
 
 
