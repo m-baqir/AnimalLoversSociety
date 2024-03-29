@@ -8,25 +8,54 @@
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>Item Code</th>
-        <th>Item Type</th>
-        <th>Sale Price</th>
-        <th>Cost</th>
-        <th>inventory</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item : ${items}">
-        <td th:text="${item.id}"></td>
-        <td th:text="${item.itemType}"></td>
-        <td th:text="${item.getSalePrice()}"></td>
-        <td th:text="${item.cost}"></td>
-        <td th:text="${item.inventory}"></td>
-    </tr>
-    </tbody>
-</table>
+
+<br>
+<div class = "container">
+    <div class = "row align-items-center justify-content-between">
+        <div class = "col">
+            <h1>Inventory</h1>
+        </div>
+        <div class = "col text-right">
+            <a th:href = "@{/items/manage}" class>
+                <button type = "button" class = "btn btn-primary">Manage Inventory</button></a>
+            <a th:href = "@{/items}">
+                <button type = "button" class = "btn btn-outline-danger">Items Homepage</button></a>
+        </div>
+    </div>
+
+    <table class = "table">
+        <thead class = "thead-dark">
+        <tr>
+            <th>Item Code</th>
+            <th>Name</th>
+            <th>Item Type</th>
+
+            <th>Avail. Inventory</th>
+            <th>Sale Order</th>
+            <th>Reordered</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.itemType}"></td>
+            <td th:text="${item.inventory}"></td>
+            <td th:text="placeholder"></td>
+            <td th:text="${item.inventoryOnReorder}"></td>
+
+            <td>
+                <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
+                    <button type = "button" class = "btn btn-primary">Reorder</button></a>
+                <a th:href = "@{/items}" onclick="return confirm('Confirm Reorder Received')">
+                    <button type = "button" class = "btn btn-outline-secondary">Reorder Received</button></a>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
