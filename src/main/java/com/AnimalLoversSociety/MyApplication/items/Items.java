@@ -2,9 +2,10 @@ package com.AnimalLoversSociety.MyApplication.items;
 
 import com.AnimalLoversSociety.MyApplication.sales.Sale;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
-
 
 @Entity // turns object into something that can be used with sql table
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // makes all inherited objects added to the same table
@@ -13,14 +14,9 @@ import java.util.List;
 @Table(name = "items") // looks for items table, if doesn't exist it creates it to the database
 public class Items {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //- this is supposed to autogenerate a number everytime object is created, but was having trouble getting to work
-
     public long id;
-
-    //@Column // attaches itemCode variable to item_code column in items table
-    //private long itemCode;
 
     @Column(nullable = false) // sets the item_type column to not nullable
     private String itemType;
@@ -34,8 +30,20 @@ public class Items {
     @Column(nullable = false)
     private long inventory;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date replenishOrderedDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date replenishArrivalDate;
+
+    @Column
+    private long inventoryOnReorder;
+
     @Column
     private double profit;
+
+    @Column
+    private String name;
 
     @OneToMany(mappedBy = "item")
     private List<Sale> sales;
@@ -43,37 +51,20 @@ public class Items {
     public Items() {
     }
 
-    //test constructor
-    /*public Items(long itemCode) {
-       // this.itemCode = itemCode;
-        itemType = "TEST";
-        salePrice = 10000;
-        cost = 10000;
-        inventory = 1000;
-
-    }*/
-
     //specific constructor
-    public Items(/*long itemCode,*/ String itemType, double salePrice, double cost, long inventory) {
-       // this.itemCode = itemCode;
+    public Items(String name, String itemType, double salePrice, double cost, long inventory) {
+        this.name = name;
         this.itemType = itemType;
         this.salePrice = salePrice;
         this.cost = cost;
         this.inventory = inventory;
-        this.profit = salePrice - cost;
-
-
+        profit = salePrice - cost;
+        replenishArrivalDate = null;
+        replenishOrderedDate = new Date();
+        inventoryOnReorder = 0;
     }
 
     //setters and getters for items
-   /* public void setId(long itemCode) {
-        this.itemCode = itemCode;
-    }
-
-    public long getId() {
-        return itemCode;
-    }*/
-
     public String getItemType() {
         return itemType;
     }
@@ -112,5 +103,40 @@ public class Items {
 
     public void setId(long id) {
         this.id = id;
+    }
+    public double getProfit() {
+        return profit;
+    }
+
+    public Date getReplenishOrderedDate() {
+        return replenishOrderedDate;
+    }
+
+    public void setReplenishOrderedDate(Date replenishOrderedDate) {
+        this.replenishOrderedDate = replenishOrderedDate;
+    }
+
+    public Date getReplenishArrivalDate() {
+        return replenishArrivalDate;
+    }
+
+    public void setReplenishArrivalDate(Date replenishArrivalDate) {
+        this.replenishArrivalDate = replenishArrivalDate;
+    }
+
+    public long getInventoryOnReorder() {
+        return inventoryOnReorder;
+    }
+
+    public void setInventoryOnReorder(long inventoryOnReorder) {
+        this.inventoryOnReorder = inventoryOnReorder;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

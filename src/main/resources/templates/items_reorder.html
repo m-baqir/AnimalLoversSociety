@@ -13,9 +13,9 @@
 <div class = "container">
     <div class = "row">
         <div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class = "text-center">Edit item</h1>
+            <h1 class = "text-center">Reorder Item</h1>
             <div class = "card-body">
-                <form th:action="@{/items/edit/{itemId} (itemId=${items.id})}" th:object="${items}"
+                <form th:action="@{/items/reorder/{itemId} (itemId=${items.id})}" th:object="${items}"
                       method="post" style="max-width: 600px; margin: 0 auto;">
                     <div class = "form-group">
                         <label>Item Type</label>
@@ -29,35 +29,34 @@
                     </div>
 
                     <div class = "form-group">
-                        <label>Price</label>
+                        <label>Date Reorder Placed</label>
                         <input
-                                type = "number"
-                                name = "Sale Price"
-                               th:field = "*{salePrice}"
+                                type = "date"
+                                name = "Date Reorder Placed"
+                                th:field = "*{replenishOrderedDate}"
                                 class = "form-control"
                                 required
                         />
                     </div>
 
                     <div class = "form-group">
-                        <label>Cost</label>
+                        <label>Expected Arrival Date</label>
                         <input
-                                type = "number"
-                                name = "cost"
-                                th:field = "*{cost}"
+                                type = "date"
+                                name = "Expected Arrival Date"
+                                th:field = "*{replenishArrivalDate}"
                                 class = "form-control"
                                 required
                         />
                     </div>
 
 
-
                     <div class = "form-group">
-                        <label>Inventory</label>
+                        <label>Reorder Quantity</label>
                         <input
                                 type = "number"
-                                name = "inventory"
-                                th:field = "*{inventory}"
+                                name = "Reorder Quantity"
+                                th:field = "*{inventoryOnReorder}"
                                 class = "form-control"
                                 required
                         />

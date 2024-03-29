@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.Date;
 
 @Controller
 public class ItemsController {
@@ -24,17 +24,6 @@ public class ItemsController {
     public String viewItemsPage() {
         return "/items";
     }
-
-    /*@RequestMapping(value = "/items/add", method = { RequestMethod.POST, RequestMethod.GET })
-    public String addNewItem(Items item) {
-        item.setItemType(item.getItemType());
-        item.setSalePrice(item.getSalePrice());
-        item.setCost(item.getCost());
-        item.setInventory(item.getInventory());
-
-        itemRepo.save(item);
-        return "item_created";
-    }*/
 
     //@GetMapping (path="items/add")
     @RequestMapping(value = "/items/add", method = { RequestMethod.POST, RequestMethod.GET })
@@ -71,8 +60,15 @@ public class ItemsController {
     @GetMapping(path = "/items/edit/{itemId}")
     public String showEditItemPage(@PathVariable String itemId, Model model) {
         long id = Long.parseLong(itemId);
-        model.addAttribute("items", itemRepo.findById(id));
+        model.addAttribute("items", itemRepo.findById(id).get());
         return "items_edit";
+    }
+
+    @GetMapping(path = "/items/delete/{itemId}")
+    public String deleteItem(@PathVariable String itemId) {
+        long id = Long.parseLong(itemId);
+        itemRepo.deleteById(id);
+        return "redirect:/items/manage";
     }
 
     @PostMapping("/items/edit/{itemId}")
@@ -91,6 +87,30 @@ public class ItemsController {
         // Save updated seminar object
         itemRepo.save(existingItem);
         return "redirect:/items/manage";
+    }
+
+    @GetMapping(path = "/items/reorder/{itemId}")
+    public String showItemReorderPage(@PathVariable String itemId, Model model) {
+        long id = Long.parseLong(itemId);
+        model.addAttribute("items", itemRepo.findById(id).get());
+        return "items_reorder";
+    }
+
+    @PostMapping("/items/reorder/{itemId}")
+    public String reorderItem(@PathVariable String itemId, @ModelAttribute("item") Items item, Model model) {
+        long id = Long.parseLong(itemId);
+        // Get seminar from database by id
+        Items existingItem = itemRepo.findById(id).get();
+
+        // Update the info
+        existingItem.setId(id);
+        existingItem.setReplenishOrderedDate(new Date());
+        existingItem.setReplenishArrivalDate(item.getReplenishArrivalDate());
+        existingItem.setInventoryOnReorder(item.getInventoryOnReorder());
+
+        // Save updated seminar object
+        itemRepo.save(existingItem);
+        return "redirect:/items/inventory";
     }
 
 

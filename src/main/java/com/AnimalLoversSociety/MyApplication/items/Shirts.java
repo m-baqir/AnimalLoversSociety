@@ -12,9 +12,10 @@ import jakarta.persistence.Entity;
 public class Shirts extends Items {
     private String colour;
     private String size;
+    private String name;
 
-    Shirts(String colour, String size) {
-        super(/*4312,*/ "Shirt", 1234, 1234, 1234);
+    Shirts(String name, String colour, String size) {
+        super(name, "Shirt", 1234, 1234, 1234);
         this.colour = colour;
         this.size = size;
 
