@@ -1,23 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Projects List</title>
+    <title>List of Projects</title>
+    <style>
+        .project {
+            margin-bottom: 20px;
+        }
+        .project a {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px; 
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <h1>Projects List</h1>
-    
-    
-    <h2>AGOC</h2>
-    <p>ooijoijoi</p>
-    <hr>
-    
-    <h2>DFAS</h2>
-    <p>joioioij</p>
-    <hr>
-    
-    <h2>OLNO</h2>
-    <p>joijoijoij</p>
-    <hr>
+    <h1>List of Projects</h1>
+    <ul>
+        <li class="project">
+            <a th:href="@{/projects/agoc}">AGOC</a>
+            <br>
+            <span>Hello World</span>
+        </li>
+        <li class="project">
+            <a th:href="@{/projects/dfas}">DFAS</a>
+            <br>
+            <span>Hello World</span>
+        </li>
+        <li class="project">
+            <a th:href="@{/projects/olno}">OLNO</a>
+            <br>
+            <span>Hello World</span>
+        </li>
+    </ul>
 </body>
 </html>
