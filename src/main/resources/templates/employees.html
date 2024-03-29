@@ -48,9 +48,33 @@
                 <td th:text="${employee.salary}">Salary</td>
                 <td th:text="${employee.department}">Department</td>
                 <td th:text="${employee.supervisor}">Supervisor</td>
-                <td th:text="${employee.project}">Project</td>
+                <td>
+                    <span th:if="${employee.project == 'AGOC'}">
+                        <a th:href="@{/projects/agoc}">AGOC</a>
+                    </span>
+                    <span th:if="${employee.project == 'DFAS'}">
+                        <a th:href="@{/projects/dfas}">DFAS</a>
+                    </span>
+                    <span th:if="${employee.project == 'OLNO'}">
+                        <a th:href="@{/projects/olno}">OLNO</a>
+                    </span>
+                </td>
             </tr>
         </tbody>
     </table>
+    
+    <!--action buttons to add, modify, remove employees-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <div class="row">
+        <div class="col">
+            <a href="/employees/add" class="btn btn-primary">Add Employee</a><br>
+        </div>
+        <div class="col">
+            <a href="/employees/modify" class="btn btn-primary">Modify Employee</a><br>
+        </div>
+        <div class="col">
+            <a href="/employees/delete" class="btn btn-danger">Delete Employee</a><br>
+        </div>
+    </div>
 </body>
 </html>

@@ -111,4 +111,9 @@ public class Employees {
     public void setProject(String project) {
         this.project = project;
     }
+
+    public Employees orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
 }
