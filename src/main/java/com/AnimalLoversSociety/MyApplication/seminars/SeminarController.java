@@ -26,7 +26,7 @@ public class SeminarController {
     public String showAddSeminarForm(Model model) {
         Seminar seminar = new Seminar(); // Create seminar object to hold form data
         model.addAttribute("seminar", seminar);
-        return "create_seminar";
+        return "seminars_create";
     }
 
     @PostMapping("/seminars")
@@ -38,13 +38,13 @@ public class SeminarController {
     @GetMapping("/seminars/manage")
     public String showManageSeminarsView(Model model) {
         model.addAttribute("seminars", seminarService.getSeminars());
-        return "manage_seminars";
+        return "seminars_manage";
     }
 
     @GetMapping("/seminars/edit/{seminarId}")
     public String showEditSeminarForm(@PathVariable Integer seminarId, Model model) {
         model.addAttribute("seminar", seminarService.getSeminarById(seminarId));
-        return "edit_seminar";
+        return "seminars_edit";
     }
 
     @PostMapping("/seminars/edit/{seminarId}")
@@ -75,7 +75,7 @@ public class SeminarController {
     @GetMapping("/seminars/register/{seminarId}")
     public String showRegisterForm(@PathVariable Integer seminarId, Model model) {
         model.addAttribute("seminar", seminarService.getSeminarById(seminarId));
-        return "seminar_register";
+        return "seminars_register";
     }
 
     @PostMapping("/seminars/register/{seminarId}")

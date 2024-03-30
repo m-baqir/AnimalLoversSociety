@@ -22,7 +22,7 @@ public class SaleConfig {
                    "Animal Book 1" ,"book", 20, 16, 300
             );
             Items item2 = new Items(
-                    "Animal book 2","video", 15, 12, 300
+                    "Animal book 2","video", 15, 12, 0
             );
             itemsRepository.saveAll(List.of(item1, item2));
 

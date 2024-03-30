@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "sales")
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class Sale {
     @JoinColumn(name = "customerId", nullable = false)
     private Customer customer;
     @ManyToOne
-    @JoinColumn(name = "itemCode", nullable = false)
+    @JoinColumn(name = "itemId", nullable = false)
     private Items item;
     private int quantity;
     private LocalDate date;

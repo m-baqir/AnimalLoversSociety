@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Table
+@Table(name = "seminars")
 public class Seminar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generates id for seminarId
