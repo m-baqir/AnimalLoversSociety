@@ -13,10 +13,10 @@ public class Sculptures extends Items {
 
     private double weight;
     private double height;
-    private String name;
 
-    Sculptures(String name,double weight, double height) {
-        super(name, "Sculpture", 1111, 1111, 1111);
+
+    Sculptures(String name, double salePrice, double cost, long inventory, double weight, double height) {
+        super(name, "Sculpture", salePrice, cost, inventory);
         this.weight = weight;
         this.height = height;
 
