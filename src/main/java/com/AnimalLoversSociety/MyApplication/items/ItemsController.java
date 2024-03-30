@@ -50,8 +50,8 @@ public class ItemsController {
             @RequestParam(value = "productType") String productType,
             @RequestParam(value = "shirtSize", required = false) String shirtSize,
             @RequestParam(value = "shirtColour", required = false) String shirtColour,
-            @RequestParam(value = "sculptureWeight", required = false) double sculptureWeight,
-            @RequestParam(value = "sculptureHeight", required = false) double sculptureHeight
+            @RequestParam(value = "sculptureWeight", required = false) String sculptureWeight,
+            @RequestParam(value = "sculptureHeight", required = false) String sculptureHeight
     ) {
         if ("Shirts".equals(productType)) {
             Shirts shirt = new Shirts(item.getName(), item.getSalePrice(), item.getCost(), item.getInventory(),
@@ -59,8 +59,10 @@ public class ItemsController {
             shirt.setProfit(item.getSalePrice() - item.getCost());
             itemRepo.save(shirt);
         } else if ("Sculptures".equals(productType)) {
+            double weight = Double.parseDouble(sculptureWeight);
+            double height = Double.parseDouble(sculptureHeight);
             Sculptures sculpture = new Sculptures(item.getName(), item.getSalePrice(), item.getCost(), item.getInventory(),
-                    sculptureWeight, sculptureHeight);
+                    weight, height);
             itemRepo.save(sculpture);
         } else {
             item.setProfit(item.getSalePrice() - item.getCost());
