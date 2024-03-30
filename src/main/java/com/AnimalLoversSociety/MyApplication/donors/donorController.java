@@ -1,17 +1,33 @@
 package com.AnimalLoversSociety.MyApplication.donors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class donorController {
-    @PostMapping(path="/donors")
+    @Autowired
+    private donorRepository donorRepo;
 
     @GetMapping(path = "/donors")
-    @RequestMapping(path = "donors")
     public String donor() {
-        return "Donors";
+        return "donors";
+    }
+
+    //Add donor
+    @GetMapping("/donors/add")
+    public String showDonorAdd(Model model) {
+        Iterable<donor> donor1 = donorRepo.findAll();
+        model.addAttribute("donor", donor1);
+        return "donors_add";
+    }
+
+    //Edit donor
+    @GetMapping("/donors/edit")
+    public String showDonorEdit(Model model) {
+        Iterable<donor> donor1 = donorRepo.findAll();
+        model.addAttribute("donor", donor1);
+        return "donors_edit";
     }
 }
