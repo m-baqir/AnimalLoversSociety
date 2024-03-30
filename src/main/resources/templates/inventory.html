@@ -15,11 +15,31 @@
         <div class = "col">
             <h1>Inventory</h1>
         </div>
+
+
         <div class = "col text-right">
             <a th:href = "@{/items/manage}" class>
                 <button type = "button" class = "btn btn-primary">Manage Inventory</button></a>
             <a th:href = "@{/items}">
                 <button type = "button" class = "btn btn-outline-danger">Items Homepage</button></a>
+        </div>
+    </div>
+
+    <div class="row align-items-center">
+        <div class="col align">
+            <input type="text" id="searchInput" placeholder="Search...">
+        </div>
+        <div class="col">
+            <label for="filterItemType">Filter by Item Type:</label>
+            <select id="filterItemType" onchange="filterTable()">
+                <option value="">All</option>
+                <option value="Book">Books</option>
+                <option value="Video">Videos</option>
+                <option value="Shirts">Shirts</option>
+                <option value="Sculptures">Sculptures</option>
+                <option value="Bumper Stickers">Bumper Sticks</option>
+
+            </select>
         </div>
     </div>
 
@@ -30,9 +50,9 @@
             <th>Name</th>
             <th>Item Type</th>
 
-            <th>Avail. Inventory</th>
-            <th>Sale Order</th>
-            <th>Reordered</th>
+            <th style="text-align:right">Total Inventory</th>
+            <th style="text-align:right">Sale Order</th>
+            <th style="text-align:right">Reordered</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -41,14 +61,14 @@
             <td th:text="${item.id}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.itemType}"></td>
-            <td th:text="${item.inventory}"></td>
+            <td style="text-align:right" th:text="${#numbers.formatDecimal(item.inventory, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
             <td th:text="placeholder"></td>
-            <td th:text="${item.inventoryOnReorder}"></td>
+            <td style="text-align:right" th:text="${#numbers.formatDecimal(item.inventoryOnReorder, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
 
             <td>
                 <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
                     <button type = "button" class = "btn btn-primary">Reorder</button></a>
-                <a th:href = "@{/items}" onclick="return confirm('Confirm Reorder Received')">
+                <a th:href = "@{/items/reorder/received/{id}(id=${item.id})}" onclick="return confirm('Confirm Reorder Received')">
                     <button type = "button" class = "btn btn-outline-secondary">Reorder Received</button></a>
 
 
@@ -57,5 +77,38 @@
         </tbody>
     </table>
 </div>
+<script>
+    $(document).ready(function(){
+        $("#searchInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".table tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+<script>
+    function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("filterItemType");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2]; // Index 2 corresponds to Item Type column
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1 || filter === '') {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+
 </body>
 </html>

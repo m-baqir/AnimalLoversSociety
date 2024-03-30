@@ -39,6 +39,8 @@ public class Items {
     @Column
     private long inventoryOnReorder;
 
+
+
     @Column
     private double profit;
 
@@ -108,6 +110,10 @@ public class Items {
         return profit;
     }
 
+    public void setProfit(double profit) {
+        this.profit = profit;
+    }
+
     public Date getReplenishOrderedDate() {
         return replenishOrderedDate;
     }
@@ -139,4 +145,6 @@ public class Items {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }

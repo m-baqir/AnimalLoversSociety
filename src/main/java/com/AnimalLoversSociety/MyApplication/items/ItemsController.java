@@ -13,7 +13,7 @@ public class ItemsController {
     @Autowired
     private ItemsRepository itemRepo;
 
-    @GetMapping("/items_create")
+    @GetMapping("/items/create")
     public String showItemCreateForm(Model model) {
         model.addAttribute("item", new Items());
 
@@ -37,9 +37,35 @@ public class ItemsController {
         return "items_create";
     }
 
+//    @PostMapping("/items")
+//    public String saveItem(@ModelAttribute("items") Items item) {
+//        item.setProfit(item.getSalePrice() - item.getCost());
+//        itemRepo.save(item);
+//        return "redirect:/items";
+//    }
+
     @PostMapping("/items")
-    public String saveItem(@ModelAttribute("items") Items item) {
-        itemRepo.save(item);
+    public String saveItem(
+            @ModelAttribute("items") Items item,
+            @RequestParam(value = "productType") String productType,
+            @RequestParam(value = "shirtSize", required = false) String shirtSize,
+            @RequestParam(value = "shirtColour", required = false) String shirtColour,
+            @RequestParam(value = "sculptureWeight", required = false) double sculptureWeight,
+            @RequestParam(value = "sculptureHeight", required = false) double sculptureHeight
+    ) {
+        if ("Shirts".equals(productType)) {
+            Shirts shirt = new Shirts(item.getName(), item.getSalePrice(), item.getCost(), item.getInventory(),
+                    shirtSize, shirtColour);
+            shirt.setProfit(item.getSalePrice() - item.getCost());
+            itemRepo.save(shirt);
+        } else if ("Sculptures".equals(productType)) {
+            Sculptures sculpture = new Sculptures(item.getName(), item.getSalePrice(), item.getCost(), item.getInventory(),
+                    sculptureWeight, sculptureHeight);
+            itemRepo.save(sculpture);
+        } else {
+            item.setProfit(item.getSalePrice() - item.getCost());
+            itemRepo.save(item);
+        }
         return "redirect:/items";
     }
 
@@ -83,6 +109,7 @@ public class ItemsController {
         existingItem.setSalePrice(item.getSalePrice());
         existingItem.setCost(item.getCost());
         existingItem.setInventory(item.getInventory());
+        existingItem.setProfit(item.getSalePrice() - item.getCost());
 
         // Save updated seminar object
         itemRepo.save(existingItem);
@@ -110,6 +137,20 @@ public class ItemsController {
 
         // Save updated seminar object
         itemRepo.save(existingItem);
+        return "redirect:/items/inventory";
+    }
+
+    @GetMapping(path = "/items/reorder/received/{itemId}")
+    public String reorderReceived(@PathVariable String itemId) {
+        long id = Long.parseLong(itemId);
+        Items item = itemRepo.findById(id).get();
+        item.setId(id);
+        item.setInventory(item.getInventory() + item.getInventoryOnReorder());
+        item.setInventoryOnReorder(0);
+        item.setReplenishArrivalDate(null);
+        item.setReplenishOrderedDate(new Date());
+
+        itemRepo.save(item);
         return "redirect:/items/inventory";
     }
 

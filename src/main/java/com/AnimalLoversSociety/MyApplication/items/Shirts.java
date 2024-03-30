@@ -10,12 +10,14 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("1")
 public class Shirts extends Items {
+
+
     private String colour;
     private String size;
-    private String name;
 
-    Shirts(String name, String colour, String size) {
-        super(name, "Shirt", 1234, 1234, 1234);
+
+    Shirts(String name, double salePrice, double cost, long inventory, String colour, String size) {
+        super(name, "Shirt", salePrice, cost, inventory);
         this.colour = colour;
         this.size = size;
 
@@ -24,5 +26,21 @@ public class Shirts extends Items {
 
     public Shirts() {
 
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }
