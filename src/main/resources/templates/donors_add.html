@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Donor</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+    <h1 style="color: red; margin: 30px 50px;">Add Donor</h1>
+    <form action="/donors/add" method="post" style="margin-left: 50px;">
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+        
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender"><br><br>
+        
+        <label for="donation">Donation:</label>
+        <input type="text" id="donation" name="donation" required>
+        
+        <label for="name_change">Name change:</label>
+        <input type="text" id="name_change" name="name_change">
+        
+        <label for="member">Member:</label>
+        <input type="text" id="member" name="member"><br><br>
+        
+        <input type="submit" value="SAVE" class="btn btn-dark">
+
+    </form>
+</body>
+</html>
