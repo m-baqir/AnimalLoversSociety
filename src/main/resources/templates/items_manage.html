@@ -23,6 +23,24 @@
     </div>
         </div>
 
+    <div class="row align-items-center">
+        <div class="col align">
+            <input type="text" id="searchInput" placeholder="Search...">
+        </div>
+        <div class="col">
+            <label for="filterItemType">Filter by Item Type:</label>
+            <select id="filterItemType" onchange="filterTable()">
+                <option value="">All</option>
+                <option value="Book">Books</option>
+                <option value="Video">Videos</option>
+                <option value="Shirts">Shirts</option>
+                <option value="Sculptures">Sculptures</option>
+                <option value="Bumper Stickers">Bumper Sticks</option>
+
+            </select>
+        </div>
+    </div>
+
 <table class = "table">
     <thead class = "thead-dark">
     <tr>
@@ -41,10 +59,10 @@
         <td style="text-align:right" th:text="${item.id}"></td>
         <td th:text="${item.name}"></td>
         <td th:text="${item.itemType}"></td>
-        <td style="text-align:right" th:text="${item.getSalePrice()}"></td>
-        <td style="text-align:right" th:text="${item.cost}"></td>
-        <td style="text-align:right" th:text="${item.profit}"></td>
-        <td style="text-align:right" th:text="${item.inventory}"></td>
+        <td style="text-align:right" th:text="${#numbers.formatCurrency(item.getSalePrice())}"></td>
+        <td style="text-align:right" th:text="${#numbers.formatCurrency(item.cost)}"></td>
+        <td style="text-align:right" th:text="${#numbers.formatCurrency(item.profit)}"></td>
+        <td style="text-align:right" th:text="${#numbers.formatDecimal(item.inventory, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
         <td style="text-align:right" >
             <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
                 <button type = "button" class = "btn btn-outline-secondary">Reorder</button></a>
@@ -60,5 +78,37 @@
     </tbody>
 </table>
 </div>
+<script>
+    $(document).ready(function(){
+        $("#searchInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".table tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+<script>
+    function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("filterItemType");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2]; // Index 2 corresponds to Item Type column
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1 || filter === '') {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
 </body>
 </html>
