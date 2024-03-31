@@ -15,6 +15,9 @@
         <div class = "col">
             <h1>Shopping Cart</h1>
         </div>
+        <div class = "col text-right">
+            <a th:href = "@{/items/shop}" class = "btn btn-outline-secondary">Return to shop</a>
+        </div>
     </div>
 
     <table class = "table">
@@ -36,8 +39,6 @@
             <td th:text="${cartItem.quantity}"></td>
 
             <td>
-                <!-- <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
-                <button type = "button" class = "btn btn-primary">Remove from cart</button> </a>-->
                 <a th:href = "@{/cart/{id}(id=${cartItem.item.id})}">
                     <button type = "button" class = "btn btn-outline-danger">Remove from cart</button></a>
             </td>

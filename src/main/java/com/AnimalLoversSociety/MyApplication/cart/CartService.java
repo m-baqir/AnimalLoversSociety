@@ -5,7 +5,6 @@ import com.AnimalLoversSociety.MyApplication.customers.Customer;
 import com.AnimalLoversSociety.MyApplication.customers.CustomerService;
 import com.AnimalLoversSociety.MyApplication.items.Items;
 import com.AnimalLoversSociety.MyApplication.items.ItemsController;
-import com.AnimalLoversSociety.MyApplication.items.ItemsRepository;
 import com.AnimalLoversSociety.MyApplication.sales.Sale;
 import com.AnimalLoversSociety.MyApplication.sales.SaleService;
 import jakarta.transaction.Transactional;
@@ -25,16 +24,15 @@ import java.util.List;
 @Transactional
 public class CartService {
     private final ItemsController itemsController;
-    private final CustomerService customerService; // should this be final?
+    private final CustomerService customerService;
     private final SaleService saleService;
     private List<CartItem> cart = new ArrayList<>();
 
     @Autowired
     public CartService(ItemsController itemsController, CustomerService customerService, SaleService saleService) {
         this.itemsController = itemsController;
-        this.customerService = customerService; // beware of circular calling
+        this.customerService = customerService;
         this.saleService = saleService;
-        //cart = new ArrayList<>();
     }
 
     public List<CartItem> getItemsInCart() {
@@ -42,7 +40,7 @@ public class CartService {
     }
 
     public void addItem(Items newItem) {
-        // Check if cart already contains the item, if yes, then increase the quantity
+        // Check if cart already contains the item. If yes, then increase the quantity
         boolean exists = false;
         for (CartItem cartItem : cart) {
             if (cartItem.getItem().getId() == newItem.getId()) {
@@ -73,8 +71,8 @@ public class CartService {
         return total;
     }
 
-    public void saveCustomerInfo(Customer customer) {
-        customerService.saveCustomer(customer);
+    public Customer saveCustomerInfo(Customer customer) {
+        return customerService.saveCustomer(customer);
     }
 
     public void updateInventory() {

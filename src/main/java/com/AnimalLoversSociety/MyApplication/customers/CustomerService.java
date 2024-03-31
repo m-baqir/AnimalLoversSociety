@@ -25,7 +25,7 @@ public class CustomerService {
         return customer;
     }
 
-    public void saveCustomer(Customer customer) {
+    public Customer saveCustomer(Customer customer) {
         // If customer already present in database, update info
         Customer existingCustomer = getCustomerIfPresent(customer);
         if (existingCustomer != null) {
@@ -36,10 +36,10 @@ public class CustomerService {
             existingCustomer.setCity(customer.getCity());
             existingCustomer.setProvince(customer.getProvince());
             existingCustomer.setPostalCode(customer.getPostalCode());
-           customerRepository.save(existingCustomer);
+            return customerRepository.save(existingCustomer);
 
         }
         else
-            customerRepository.save(customer);
+            return customerRepository.save(customer);
     }
 }

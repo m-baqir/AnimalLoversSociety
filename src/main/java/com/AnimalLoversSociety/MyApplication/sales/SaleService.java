@@ -1,6 +1,5 @@
 package com.AnimalLoversSociety.MyApplication.sales;
 
-import com.AnimalLoversSociety.MyApplication.items.Items;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +20,5 @@ public class SaleService {
 
     public void saveSale(Sale sale) {
         saleRepository.save(sale);
-    }
-
-    public void deleteSale(Integer saleId) {
-        saleRepository.deleteById(saleId);
     }
 }

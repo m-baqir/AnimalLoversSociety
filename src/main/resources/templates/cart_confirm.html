@@ -1,57 +1,57 @@
-<!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="ISO-8859-1">-->
+<!--    <title>Shopping Cart</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />-->
+<!--    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>-->
+<!--    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
 
-<br>
-<div class = "container">
-    <div class = "row align-items-center justify-content-between">
-        <div class = "col">
-            <h1>Confirm your order</h1>
-        </div>
-    </div>
+<!--<br>-->
+<!--<div class = "container">-->
+<!--    <div class = "row align-items-center justify-content-between">-->
+<!--        <div class = "col">-->
+<!--            <h1>Confirm your order</h1>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <table class = "table">
-        <thead class = "thead-dark">
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cartItem : ${cartItems}">
-            <td th:text="${cartItem.item.name}"></td>
-            <td
-                    th:text="${cartItem.item.salePrice}">
+<!--    <table class = "table">-->
+<!--        <thead class = "thead-dark">-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Price</th>-->
+<!--            <th>Quantity</th>-->
+<!--            <th>Actions</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="cartItem : ${cartItems}">-->
+<!--            <td th:text="${cartItem.item.name}"></td>-->
+<!--            <td-->
+<!--                    th:text="${cartItem.item.salePrice}">-->
 
-            </td>
-            <td th:text="${cartItem.quantity}"></td>
+<!--            </td>-->
+<!--            <td th:text="${cartItem.quantity}"></td>-->
 
-            <td>
-                <!-- <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
-                <button type = "button" class = "btn btn-primary">Remove from cart</button> </a>-->
-                <a th:href = "@{/cart/{id}(id=${cartItem.item.id})}">
-                    <button type = "button" class = "btn btn-outline-danger">Remove from cart</button></a>
-            </td>
+<!--            <td>-->
+<!--                &lt;!&ndash; <a th:href = "@{/items/reorder/{id}(id=${item.id})}">-->
+<!--                <button type = "button" class = "btn btn-primary">Remove from cart</button> </a>&ndash;&gt;-->
+<!--                <a th:href = "@{/cart/{id}(id=${cartItem.item.id})}">-->
+<!--                    <button type = "button" class = "btn btn-outline-danger">Remove from cart</button></a>-->
+<!--            </td>-->
 
-        </tr>
-        </tbody>
-    </table>
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 
-    <div class = "col text-right">
-        <!-- Link to customer info, also put at bottom? --> <a th:href = "@{/cart/checkout}" class = "btn btn-primary">Place order</a>
-        th:action="@{/cart/checkout}" th:object = "${customer}" method="POST">
-        <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object = "${item}" method="POST">
-            <button type = "submit" class = "btn btn-primary">Place order</button></form>
-    </div>
-</div>
-</body>
-</html>
+<!--    <div class = "col text-right">-->
+<!--        &lt;!&ndash; Link to customer info, also put at bottom? &ndash;&gt; <a th:href = "@{/cart/checkout}" class = "btn btn-primary">Place order</a>-->
+<!--        th:action="@{/cart/checkout}" th:object = "${customer}" method="POST">-->
+<!--        <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object = "${item}" method="POST">-->
+<!--            <button type = "submit" class = "btn btn-primary">Place order</button></form>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
