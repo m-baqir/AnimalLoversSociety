@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "sales")
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class Sale {
     @JoinColumn(name = "customerId", nullable = false)
     private Customer customer;
     @ManyToOne
-    @JoinColumn(name = "itemCode", nullable = false)
+    @JoinColumn(name = "itemId", nullable = false)
     private Items item;
     private int quantity;
     private LocalDate date;
@@ -24,26 +24,9 @@ public class Sale {
     public Sale() {
     }
 
-    // Constructor with all fields
-//    public Sale(Integer saleId, Customer customer, Items item, int quantity, LocalDate date) {
-//        this.saleId = saleId;
-//        this.customer = customer;
-//        this.item = item;
-//        this.quantity = quantity;
-//        this.date = date;
-//    }
-
-    // Constructor without saleId (will be auto-generated)
-    public Sale(Customer customer, Items item, int quantity, LocalDate date) {
-        this.customer = customer;
-        this.item = item;
-        this.quantity = quantity;
-        this.date = date;
-    }
-
     /* Constructor without Customer and Item field
-    First need to instantiate a Customer and a Sale
-    Then use the setCustomer and setItem methods (or else customerId and item_code field will be null and cause an error)
+    First need to instantiate a Customer and an Item
+    Then use the setCustomer and setItem methods (or else customerId and itemId fields will be null and cause an error)
                  */
     public Sale(int quantity, LocalDate date) {
         this.quantity = quantity;

@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
-import java.util.List;
 
 // This class adds sample data to the database
 @Configuration
@@ -17,22 +16,28 @@ public class SaleConfig {
     @Bean
     CommandLineRunner saleRunner(SaleRepository saleRepository, CustomerRepository customerRepository, ItemsRepository itemsRepository) {
         return args -> {
-
-            Items item1 = new Items(
-                   "Animal Book 1" ,"book", 20, 16, 300
-            );
-            Items item2 = new Items(
-                    "Animal book 2","video", 15, 12, 300
-            );
-            itemsRepository.saveAll(List.of(item1, item2));
-
             Sale sale1 = new Sale(1, LocalDate.parse("2024-03-03"));
-            Sale sale2= new Sale(2, LocalDate.parse("2024-03-15"));
-            sale1.setItem(item1);
-            sale2.setItem(item2);
+            Sale sale2 = new Sale(2, LocalDate.parse("2024-03-15"));
 
             // if condition prevents the same sample data being entered into the database every time the server is started
-            if (customerRepository.findByFirstNameAndLastName("Cam","Adams").isEmpty()) {
+            if (itemsRepository.getItemByName("Animal Book 1") == null) {
+                Items item1 = new Items(
+                        "Animal Book 1", "book", 20, 16, 300
+                );
+                itemsRepository.save(item1);
+                sale1.setItem(item1);
+            }
+
+            if (itemsRepository.getItemByName("Animal Video 1") == null) {
+                Items item2 = new Items(
+                        "Animal Video 1", "video", 15, 12, 0
+                );
+                itemsRepository.save(item2);
+                sale2.setItem(item2);
+            }
+
+
+            if (customerRepository.getCustomerByFirstNameAndLastName("Cam","Adams") == null) {
                 Customer customer1 = new Customer(
                         "Cam", "Adams", "246 Orange St", "Vancouver", "BC", "V5K0A3"
                 );
@@ -40,7 +45,7 @@ public class SaleConfig {
                 sale1.setCustomer(customer1);
                 saleRepository.save(sale1);
             }
-            if (customerRepository.findByFirstNameAndLastName("Claire","Benson").isEmpty()) {
+            if (customerRepository.getCustomerByFirstNameAndLastName("Claire","Benson") == null) {
                 Customer customer2 = new Customer(
                         "Claire", "Benson", "357 Lemon Dr", "Vancouver", "BC", "V5K0B5"
                 );

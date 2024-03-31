@@ -23,6 +23,7 @@
                                 field = "*{title}"
                                 class = "form-control"
                                 placeholder="Enter seminar title"
+                                required
                                 />
                         </div>
 
@@ -34,6 +35,7 @@
                                     field = "*{date}"
                                     class = "form-control"
                                     placeholder="Enter date"
+                                    required
                             />
                         </div>
 
@@ -45,6 +47,7 @@
                                     field = "*{time}"
                                     class = "form-control"
                                     placeholder="Enter time"
+                                    required
                             />
                         </div>
 
@@ -56,6 +59,7 @@
                                     field = "*{location}"
                                     class = "form-control"
                                     placeholder="Enter location"
+                                    required
                             />
                         </div>
 
@@ -67,13 +71,13 @@
                                     field = "*{capacity}"
                                     class = "form-control"
                                     placeholder="Enter max capacity"
+                                    required
                             />
                         </div>
 
                         <div class = "box-footer">
-                            <button type = "submit" class = "btn btn-primary">
-                                Submit
-                            </button>
+                            <button type = "submit" class = "btn btn-primary">Submit</button>
+                            <a th:href = "@{/seminars/manage}" class = "btn btn-outline-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

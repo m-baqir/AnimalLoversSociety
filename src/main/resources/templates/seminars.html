@@ -15,6 +15,7 @@
                 <h1>Seminars</h1>
             </div>
             <div class = "col text-right">
+                <a th:href = "@{/}" class = "btn btn-outline-secondary">Return to homepage</a>
                 <a th:href = "@{/seminars/manage}" class = "btn btn-primary"> Manage seminars</a>
             </div>
         </div>
@@ -44,7 +45,7 @@
                             <button type = "button" class = "btn btn-primary">Sign up</button></a>
                         </p>
                         <p th:case = "true">
-                            <button type = "button" class="btn btn-primary" disabled>Sign up</button>
+                            <button type = "button" class="btn btn-primary" disabled>Seminar full</button>
                         </p>
                     </td>
                 </tr>

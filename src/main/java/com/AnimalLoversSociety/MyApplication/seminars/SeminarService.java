@@ -19,8 +19,7 @@ public class SeminarService {
         return seminarRepository.findAll();
     }
 
-    public Seminar saveSeminar(Seminar seminar) {
-        return seminarRepository.save(seminar); }
+    public Seminar saveSeminar(Seminar seminar) { return seminarRepository.save(seminar); }
 
     public void deleteSeminarById(Integer seminarId) {
         seminarRepository.deleteById(seminarId);
