@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Items</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -16,7 +16,7 @@
             <h1>Shopping Cart</h1>
         </div>
         <div class = "col text-right">
-            <!-- Link to customer info, also put at bottom? --> <a th:href = "@{/seminars/manage}" class = "btn btn-primary">Checkout</a>
+            <!-- Link to customer info, also put at bottom? --> <a th:href = "@{/cart/checkout}" class = "btn btn-primary">Checkout</a>
         </div>
     </div>
 

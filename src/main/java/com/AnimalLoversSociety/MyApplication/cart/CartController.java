@@ -1,5 +1,6 @@
 package com.AnimalLoversSociety.MyApplication.cart;
 
+import com.AnimalLoversSociety.MyApplication.customers.Customer;
 import com.AnimalLoversSociety.MyApplication.items.Items;
 import com.AnimalLoversSociety.MyApplication.items.ItemsController;
 import com.AnimalLoversSociety.MyApplication.seminars.Seminar;
@@ -39,5 +40,18 @@ public class CartController {
     public String removeItemFromCart(@PathVariable long id) {
         cartService.removeItem(itemsController.getItemById(id));
         return "redirect:/cart";
+    }
+
+    @GetMapping("cart/checkout")
+    public String showCheckoutForm(Model model) {
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+        return "cart_checkout";
+    }
+
+    @PostMapping("/cart/checkout")
+    public String processCheckout(@ModelAttribute("customer") Customer customer) {
+        cartService.checkout(customer);
+        return "redirect:/items/shop";
     }
 }

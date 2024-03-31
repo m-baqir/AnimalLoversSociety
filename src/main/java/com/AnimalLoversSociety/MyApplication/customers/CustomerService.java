@@ -1,5 +1,6 @@
 package com.AnimalLoversSociety.MyApplication.customers;
 
+import com.AnimalLoversSociety.MyApplication.seminars.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,30 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public void addNewCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public Customer getCustomerIfPresent(Customer newCustomer) {
+        Customer customer = customerRepository.getCustomerByFirstNameAndLastName(newCustomer.getFirstName(), newCustomer.getLastName());
+//        if (customer != null)
+//            return customerRepository.findById(customer.getCustomerId()).get();
+//        else
+//            return null;
+        return customer;
     }
 
-    public void deleteCustomer(Integer customerId) {
-        customerRepository.deleteById(customerId);
+    public Customer saveCustomer(Customer customer) {
+        // If customer already present in database, update info
+        Customer existingCustomer = getCustomerIfPresent(customer);
+        if (existingCustomer != null) {
+            // id, firstname, lastname?
+           existingCustomer.setStreetAddress(customer.getStreetAddress());
+           existingCustomer.setCity(customer.getCity());
+           existingCustomer.setProvince(customer.getProvince());
+           existingCustomer.setPostalCode(customer.getPostalCode());
+        }
+
+        return customerRepository.save(customer);
     }
+
+//    public void deleteCustomer(Integer customerId) {
+//        customerRepository.deleteById(customerId);
+//    }
 }

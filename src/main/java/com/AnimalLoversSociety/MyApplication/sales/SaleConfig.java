@@ -32,7 +32,7 @@ public class SaleConfig {
             sale2.setItem(item2);
 
             // if condition prevents the same sample data being entered into the database every time the server is started
-            if (customerRepository.findByFirstNameAndLastName("Cam","Adams").isEmpty()) {
+            if (customerRepository.getCustomerByFirstNameAndLastName("Cam","Adams") == null) {
                 Customer customer1 = new Customer(
                         "Cam", "Adams", "246 Orange St", "Vancouver", "BC", "V5K0A3"
                 );
@@ -40,7 +40,7 @@ public class SaleConfig {
                 sale1.setCustomer(customer1);
                 saleRepository.save(sale1);
             }
-            if (customerRepository.findByFirstNameAndLastName("Claire","Benson").isEmpty()) {
+            if (customerRepository.getCustomerByFirstNameAndLastName("Claire","Benson") == null) {
                 Customer customer2 = new Customer(
                         "Claire", "Benson", "357 Lemon Dr", "Vancouver", "BC", "V5K0B5"
                 );
