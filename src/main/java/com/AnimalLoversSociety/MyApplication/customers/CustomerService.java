@@ -22,28 +22,24 @@ public class CustomerService {
 
     public Customer getCustomerIfPresent(Customer newCustomer) {
         Customer customer = customerRepository.getCustomerByFirstNameAndLastName(newCustomer.getFirstName(), newCustomer.getLastName());
-//        if (customer != null)
-//            return customerRepository.findById(customer.getCustomerId()).get();
-//        else
-//            return null;
         return customer;
     }
 
-    public Customer saveCustomer(Customer customer) {
+    public void saveCustomer(Customer customer) {
         // If customer already present in database, update info
         Customer existingCustomer = getCustomerIfPresent(customer);
         if (existingCustomer != null) {
-            // id, firstname, lastname?
-           existingCustomer.setStreetAddress(customer.getStreetAddress());
-           existingCustomer.setCity(customer.getCity());
-           existingCustomer.setProvince(customer.getProvince());
-           existingCustomer.setPostalCode(customer.getPostalCode());
+            existingCustomer.setCustomerId(existingCustomer.getCustomerId());
+            existingCustomer.setFirstName(customer.getFirstName());
+            existingCustomer.setLastName(customer.getLastName());
+            existingCustomer.setStreetAddress(customer.getStreetAddress());
+            existingCustomer.setCity(customer.getCity());
+            existingCustomer.setProvince(customer.getProvince());
+            existingCustomer.setPostalCode(customer.getPostalCode());
+           customerRepository.save(existingCustomer);
+
         }
-
-        return customerRepository.save(customer);
+        else
+            customerRepository.save(customer);
     }
-
-//    public void deleteCustomer(Integer customerId) {
-//        customerRepository.deleteById(customerId);
-//    }
 }

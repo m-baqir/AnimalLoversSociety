@@ -4,8 +4,10 @@ import com.AnimalLoversSociety.MyApplication.cartitems.CartItem;
 import com.AnimalLoversSociety.MyApplication.customers.Customer;
 import com.AnimalLoversSociety.MyApplication.customers.CustomerService;
 import com.AnimalLoversSociety.MyApplication.items.Items;
+import com.AnimalLoversSociety.MyApplication.items.ItemsController;
 import com.AnimalLoversSociety.MyApplication.items.ItemsRepository;
 import com.AnimalLoversSociety.MyApplication.sales.Sale;
+import com.AnimalLoversSociety.MyApplication.sales.SaleService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,14 +24,16 @@ import java.util.List;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
 public class CartService {
-    private final ItemsRepository itemsRepository;
+    private final ItemsController itemsController;
     private final CustomerService customerService; // should this be final?
+    private final SaleService saleService;
     private List<CartItem> cart = new ArrayList<>();
 
     @Autowired
-    public CartService(ItemsRepository itemsRepository, CustomerService customerService) {
-        this.itemsRepository = itemsRepository;
+    public CartService(ItemsController itemsController, CustomerService customerService, SaleService saleService) {
+        this.itemsController = itemsController;
         this.customerService = customerService; // beware of circular calling
+        this.saleService = saleService;
         //cart = new ArrayList<>();
     }
 
@@ -61,31 +65,42 @@ public class CartService {
         }
     }
 
-    public void checkout(Customer customer) {
-        // Check enough inventory (implement this after adding feature that lets user change quantity from cart page)
-
-        // Update inventory
+    public double getTotal() {
+        double total = 0;
         for (CartItem cartItem : cart) {
-            Items item = cartItem.getItem();
+            total += cartItem.getItem().getSalePrice() * cartItem.getQuantity();
+        }
+        return total;
+    }
+
+    public void saveCustomerInfo(Customer customer) {
+        customerService.saveCustomer(customer);
+    }
+
+    public void updateInventory() {
+        for (CartItem cartItem : cart) {
+            long itemId = cartItem.getItem().getId();
+            Items item = itemsController.getItemById(itemId); // Need to get the item from the itemsrepository to link to items table
             item.setInventory(item.getInventory() - cartItem.getQuantity());
         }
+    }
 
-        // Customer info
-        customerService.saveCustomer(customer);
-
-        // Update sales table
+    public void saveToSales(Customer customer) {
         for (CartItem cartItem : cart) {
             Sale sale = new Sale();
-            // set saleid? or auto-gen?
-            sale.setCustomer(customer); // or by id?
-            sale.setItem(cartItem.getItem()); // or by id?
+            long itemId = cartItem.getItem().getId();
+            Items item = itemsController.getItemById(itemId); // Need to get the item from the itemsrepository to link to  items table
+
+            sale.setItem(item);
+            sale.setCustomer(customer);
             sale.setQuantity(cartItem.getQuantity());
             sale.setDate(LocalDate.now());
-
+            saleService.saveSale(sale);
         }
+    }
 
-        // Delete cart
-        //cart.clear();
+    public void deleteCart() {
+        cart.clear();
     }
 
 }

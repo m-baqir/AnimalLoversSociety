@@ -27,6 +27,7 @@ public class CartController {
     @GetMapping("/cart")
     public String showCart(Model model) {
         model.addAttribute("cartItems", cartService.getItemsInCart());
+        model.addAttribute("total", cartService.getTotal());
         return "cart";
     }
 
@@ -50,8 +51,12 @@ public class CartController {
     }
 
     @PostMapping("/cart/checkout")
-    public String processCheckout(@ModelAttribute("customer") Customer customer) {
-        cartService.checkout(customer);
+    public String placeOrder(@ModelAttribute("customer") Customer customer) {
+        cartService.saveCustomerInfo(customer);
+        cartService.updateInventory();
+        cartService.saveToSales(customer);
+        cartService.deleteCart();
+        //return "cart_confirm";
         return "redirect:/items/shop";
     }
 }

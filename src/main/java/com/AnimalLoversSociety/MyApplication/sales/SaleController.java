@@ -20,7 +20,7 @@ public class SaleController {
 
     @PostMapping
     public void addSale(@RequestBody Sale sale) {
-        saleService.addNewSale(sale);
+        saleService.saveSale(sale);
     }
 
     @DeleteMapping(path = "{saleId}")
