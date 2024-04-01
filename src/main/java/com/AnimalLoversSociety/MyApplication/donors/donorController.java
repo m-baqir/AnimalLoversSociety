@@ -11,7 +11,8 @@ public class donorController {
     private donorRepository donorRepo;
 
     @GetMapping(path = "/donors")
-    public String donor() {
+    public String donor(Model model) {
+        model.addAttribute("donors", donorRepo.findAll());
         return "donors";
     }
 
