@@ -21,13 +21,13 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    @PostMapping
-    public void addCustomer(@RequestBody Customer customer) {
-        customerService.addNewCustomer(customer);
-    }
+//    @PostMapping
+//    public void addCustomer(@RequestBody Customer customer) {
+//        customerService.addNewCustomer(customer);
+//    }
 
-    @DeleteMapping(path = "{customerId}")
-    public void deleteCustomer(@PathVariable("customerId") Integer customerId) {
-        customerService.deleteCustomer(customerId);
-    }
+//    @DeleteMapping(path = "{customerId}")
+//    public void deleteCustomer(@PathVariable("customerId") Integer customerId) {
+//        customerService.deleteCustomer(customerId);
+//    }
 }

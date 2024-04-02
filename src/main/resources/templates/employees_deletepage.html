@@ -41,7 +41,10 @@
         </thead>
         <tbody>
             <tr th:each="employee : ${employees}">
-                <td th:text="${employee.employeeData}">Data</td>
+                <td>
+                    <a th:if="${deleteMode}" th:href="@{/employees/delete/{employeeData}(employeeData=${employee.employeeData})}" th:text="${employee.employeeData}"></a>
+                    <span th:if="${!deleteMode}" th:text="${employee.employeeData}"></span>
+                </td>
                 <td th:text="${employee.employeeID}">ID</td>
                 <td th:text="${employee.employeeName}">Name</td>
                 <td th:text="${employee.title}">Title</td>
@@ -62,20 +65,6 @@
             </tr>
         </tbody>
     </table>
-    
-    <!--action buttons to add, modify, remove employees-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <div class="row">
-        <div class="col">
-            <a href="/employees/add" class="btn btn-primary">Add Employee</a><br>
-        </div>
-        <div class="col">
-            <a href="/employees/modify" class="btn btn-primary">Modify Employee</a><br>
-        </div>
-        <div class="col">
-            <a href="/employees/delete" class="btn btn-danger">Delete Employee</a><br>
-        </div>
-    </div>
 
 </body>
 </html>

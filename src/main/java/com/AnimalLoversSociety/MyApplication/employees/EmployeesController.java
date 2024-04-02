@@ -1,14 +1,20 @@
 package com.AnimalLoversSociety.MyApplication.employees;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+//import org.springframework.validation.BindingResult;
 //import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import java.util.Optional;
 
 @Controller
 public class EmployeesController {
@@ -51,13 +57,39 @@ public class EmployeesController {
     }
 
     @PostMapping("/employees/add")
-    public String addEmployee(@ModelAttribute Employees employee) {
-        employeesRepository.save(employee);
-        return "redirect:/employees";
+    public String addEmployee(@ModelAttribute("employee") Employees employee, Model model) {
+        Optional<Employees> existingEmployeeOptional = employeesRepository.findByEmployeeID(employee.getEmployeeID());
+        if (existingEmployeeOptional.isPresent()) {
+            Employees existingEmployee = existingEmployeeOptional.get();
+            if (existingEmployee.getEmployeeName().equals(employee.getEmployeeName())) {
+                employeesRepository.save(employee);
+                return "redirect:/employees";
+            } else {
+                model.addAttribute("error", "Employee ID already exists with a different name.");
+                return "employees_add";
+            }
+        } else {
+            Optional<Employees> employeeWithNameOptional = employeesRepository.findByEmployeeName(employee.getEmployeeName());
+            if (employeeWithNameOptional.isPresent()) {
+                model.addAttribute("error", "Employee name already exists with a different ID.");
+                return "employees_add";
+            } else {
+                employeesRepository.save(employee);
+                return "redirect:/employees";
+            }
+        }
     }
 
     //Modify employees
-    @PostMapping("/employees/modify/{employeeData}")
+    @GetMapping("/employees/modify")
+    public String showModifyMode(Model model) {
+        Iterable<Employees> employees = employeesRepository.findAll();
+        model.addAttribute("employees", employees);
+        model.addAttribute("modifyMode", true);
+        return "employees_modifypage";
+    }
+
+    @GetMapping("/employees/modify/{employeeData}")
     public String showModifyEmployeeForm(@PathVariable("employeeData") int employeeData, Model model) {
         Employees employee = employeesRepository.findById(employeeData).orElseThrow(() -> new IllegalArgumentException("Invalid employee Data"));
         model.addAttribute("employee", employee);
@@ -76,17 +108,26 @@ public class EmployeesController {
     return "employees_delete";
     } */
 
+    //private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
 
-    @GetMapping("/employees/delete/{employeeData}")
-    public String showDeleteEmployeeForm(@PathVariable("employeeData") int employeeData, Model model) {
-        Employees employee = employeesRepository.findById(employeeData).orElseThrow(() -> new IllegalArgumentException("Invalid employee Data"));
-        model.addAttribute("employee", employee);
-        return "employees_delete";
+    @GetMapping("/employees/delete")
+    public String showDeleteMode(Model model) {
+        Iterable<Employees> employees = employeesRepository.findAll();
+        model.addAttribute("employees", employees);
+        model.addAttribute("deleteMode", true);
+        return "employees_deletepage";
     }
 
+    @GetMapping("/employees/delete/{employeeData}")
+    public String showDeleteEmployeeDataForm(@PathVariable("employeeData") int employeeData, Model model) {
+        Employees employee = employeesRepository.findById(employeeData)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid employee Data: " + employeeData));
+        model.addAttribute("employee", employee);
+        return "employees_delete";  
+    }
 
     @PostMapping("/employees/delete/{employeeData}")
-    public String deleteEmployee(@PathVariable("employeeData") int employeeData) {
+    public String deleteEmployeeData(@PathVariable("employeeData") int employeeData) {
         employeesRepository.deleteById(employeeData);
         return "redirect:/employees";
     }

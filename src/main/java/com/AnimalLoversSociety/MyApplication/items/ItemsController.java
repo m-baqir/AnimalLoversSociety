@@ -156,5 +156,13 @@ public class ItemsController {
         return "redirect:/items/inventory";
     }
 
+    @GetMapping(path = "/items/shop")
+    public String showItemsShopPage(Model model) {
+        model.addAttribute("items", itemRepo.findAll());
+        return "items_shop";
+    }
 
+    public Items getItemById(long id) {
+        return itemRepo.findById(id).get();
+    }
 }

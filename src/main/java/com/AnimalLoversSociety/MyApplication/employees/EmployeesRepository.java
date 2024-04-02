@@ -8,6 +8,9 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
     Iterable<Employees> findByDepartment(String department);
     Iterable<Employees> findByProject(String project);
     Iterable<Employees> findByDepartmentAndProject(String department, String project);
+    Optional<Employees> findByEmployeeID(int employeeID);
+    Optional<Employees> findByEmployeeName(String employeeName);
 
     Optional <Employees> findById(int employeeData);
+    boolean existsByEmployeeID(int employeeID);
 }

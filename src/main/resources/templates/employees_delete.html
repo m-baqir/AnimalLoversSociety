@@ -2,17 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Employee List</title>
+    <title>Confirm Deletion</title>
 </head>
 <body>
-    <h1>Employee List</h1>
-    
-    <form th:action="@{'/employees/delete/' + ${employee.employeeData}}" method="post">
-        <input type="hidden" name="_method" value="DELETE">
-        <button type="submit">Delete</button>
-    </form>
-    
-    <h2>Employee Details</h2>
+    <h1>Are you sure you want to delete this data?</h1>
     <table border="1">
         <thead>
             <tr>
@@ -24,29 +17,28 @@
                 <th>Department</th>
                 <th>Supervisor</th>
                 <th>Project</th>
-                <th>Action</th> 
             </tr>
         </thead>
         <tbody>
-            <tr th:each="employee : ${employees}">
-                <td th:text="${employee.employeeData}">Data</td>
-                <td th:text="${employee.employeeID}">ID</td>
-                <td th:text="${employee.employeeName}">Name</td>
+            <tr>
+                <td th:text="${employee.employeeData}">Employee Data</td>
+                <td th:text="${employee.employeeID}">Employee ID</td>
+                <td th:text="${employee.employeeName}">Employee Name</td>
                 <td th:text="${employee.title}">Title</td>
                 <td th:text="${employee.salary}">Salary</td>
                 <td th:text="${employee.department}">Department</td>
                 <td th:text="${employee.supervisor}">Supervisor</td>
                 <td th:text="${employee.project}">Project</td>
-                <td>
-                    <form th:action="@{'/employees/delete/' + ${employee.employeeData}}" method="post">
-                        <input type="hidden" name="_method" value="DELETE"> <!-- For using DELETE method -->
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
             </tr>
         </tbody>
     </table>
-    <a href="/employees/add" class="btn btn-primary">Add Employee</a>
-    <a href="/employees/modify" class="btn btn-primary">Modify Employee</a>
+    <div class="button-group">
+        <form th:action="@{'/employees/delete/' + ${employee.employeeData}}" method="post" style="display: inline;">
+            <button type="submit">Confirm Delete</button>
+        </form>
+        <form th:action="@{/employees}" method="get" style="display: inline;">
+            <button type="submit">Cancel</button>
+        </form>
+    </div>
 </body>
 </html>

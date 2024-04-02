@@ -11,7 +11,7 @@ public class CustomerConfig {
     CommandLineRunner customerRunner(CustomerRepository repository) {
         return args -> {
             // if condition prevents the same sample data being entered into the database every time the server is started
-            if (repository.findByFirstNameAndLastName("John","Smith").isEmpty()) {
+            if (repository.getCustomerByFirstNameAndLastName("John", "Smith") == null)  {
                 Customer customer1 = new Customer(
                         "John",
                         "Smith",
@@ -23,7 +23,8 @@ public class CustomerConfig {
                 repository.save(customer1);
             }
 
-            if (repository.findByFirstNameAndLastName("Amy","Roberts").isEmpty()) {
+            //if (repository.findByFirstNameAndLastName("Amy","Roberts").isEmpty())
+            if (repository.getCustomerByFirstNameAndLastName("Amy","Roberts") == null) {
                 Customer customer2 = new Customer(
                         "Amy",
                         "Roberts",

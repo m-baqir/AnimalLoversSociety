@@ -47,8 +47,9 @@ public class Items {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "item")
-    private List<Sale> sales;
+//    @OneToMany(mappedBy = "item")
+//    private List<Sale> sales;
+
 
     public Items() {
     }

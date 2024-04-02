@@ -1,6 +1,6 @@
 package com.AnimalLoversSociety.MyApplication.items;
 
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,4 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface ItemsRepository extends CrudRepository<Items, Long> {
+    @Query
+    public Items getItemByName(String name);
 }

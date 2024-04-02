@@ -6,9 +6,10 @@
 </head>
 <body>
     <h1>Add Employee</h1>
-    <form action="/employees/add" method="post">
+    <form action="/employees/add" method="post" th:object="${employee}">
         <label for="employeeID">Employee ID:</label>
         <input type="text" id="employeeID" name="employeeID" required><br>
+        <p th:if="${error}" th:text="${error}" style="color: red;">This ID exists.</p>
         
         <label for="employeeName">Employee Name:</label>
         <input type="text" id="employeeName" name="employeeName" required><br>

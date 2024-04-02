@@ -18,11 +18,7 @@ public class SaleService {
         return saleRepository.findAll();
     }
 
-    public void addNewSale(Sale sale) {
+    public void saveSale(Sale sale) {
         saleRepository.save(sale);
-    }
-
-    public void deleteSale(Integer saleId) {
-        saleRepository.deleteById(saleId);
     }
 }

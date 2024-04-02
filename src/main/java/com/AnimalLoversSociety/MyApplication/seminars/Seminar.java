@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Table
+@Table(name = "seminars")
 public class Seminar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generates id for seminarId
@@ -28,23 +28,6 @@ public class Seminar {
     // No-arg constructor
     public Seminar() {
     }
-
-    // Constructor with all fields
-//    public Seminar(int seminarId,
-//                   String title,
-//                   LocalDate date,
-//                   LocalTime time,
-//                   String location,
-//                   int capacity,
-//                   int enrolled) {
-//        this.seminarId = seminarId;
-//        this.title = title;
-//        this.date = date;
-//        this.time = time;
-//        this.location = location;
-//        this.capacity = capacity;
-//        this.enrolled = enrolled;
-//    }
 
     // Constructor without id (will be auto-generated)
     public Seminar(String title,

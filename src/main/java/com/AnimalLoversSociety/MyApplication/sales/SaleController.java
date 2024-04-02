@@ -1,11 +1,11 @@
 package com.AnimalLoversSociety.MyApplication.sales;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
-@RestController
-@RequestMapping(path = "sales")
+@Controller
 public class SaleController {
     private final SaleService saleService;
 
@@ -13,18 +13,9 @@ public class SaleController {
     public SaleController(SaleService saleService) {
         this.saleService = saleService; }
 
-    @GetMapping
-    public List<Sale> getSales() {
-        return saleService.getSales();
-    }
-
-    @PostMapping
-    public void addSale(@RequestBody Sale sale) {
-        saleService.addNewSale(sale);
-    }
-
-    @DeleteMapping(path = "{saleId}")
-    public void deleteSale(@PathVariable("saleId") Integer saleId) {
-        saleService.deleteSale(saleId);
+    @GetMapping("/sales")
+    public String getSales(Model model) {
+        model.addAttribute("sales", saleService.getSales());
+        return "sales";
     }
 }
