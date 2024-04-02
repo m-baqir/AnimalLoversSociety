@@ -34,7 +34,7 @@
         <tbody>
         <tr th:each = "sale: ${sales}">
             <td th:text = "${sale.item.id}"></td>
-            <td th:text = "${sale.item.name}"></td>
+            <td style="vertical-align: middle" th:text="${sale.item.itemType == 'Shirt' ? sale.item.name + ' - ' + sale.item.size + ' / ' + sale.item.colour : sale.item.itemType == 'Sculpture' ? sale.item.name + ' - ' + sale.item.weight + 'kg / ' + sale.item.height + '&quot;': sale.item.name}"></td>
             <td th:text = "${sale.quantity}"></td>
             <td th:text = "${sale.customer.firstName} + ' ' + ${sale.customer.lastName}"></td>
             <td th:text = "${sale.customer.streetAddress} + ', ' + ${sale.customer.city} + ', ' + ${sale.customer.province} + ' ' + ${sale.customer.postalCode}"></td>

@@ -32,7 +32,7 @@
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
-            <td th:text="${item.name}"></td>
+            <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
             <td th:text="${item.salePrice}"></td>
             <td th:text="${item.inventory}"></td>
 
