@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Items</title>
+    <title>Inventory</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -15,8 +15,6 @@
         <div class = "col">
             <h1>Inventory</h1>
         </div>
-
-
         <div class = "col text-right">
             <a th:href = "@{/items/manage}" class>
                 <button type = "button" class = "btn btn-primary">Manage Inventory</button></a>
@@ -25,19 +23,19 @@
         </div>
     </div>
 
-    <div class="row align-items-center">
-        <div class="col align">
+    <div class="row align-items-center justify-content-end">
+        <div class="col md-auto">
             <input type="text" id="searchInput" placeholder="Search...">
         </div>
-        <div class="col">
+        <div class="col-md-auto">
             <label for="filterItemType">Filter by Item Type:</label>
             <select id="filterItemType" onchange="filterTable()">
                 <option value="">All</option>
                 <option value="Book">Books</option>
                 <option value="Video">Videos</option>
-                <option value="Shirts">Shirts</option>
-                <option value="Sculptures">Sculptures</option>
-                <option value="Bumper Stickers">Bumper Sticks</option>
+                <option value="Shirt">Shirts</option>
+                <option value="Sculpture">Sculptures</option>
+                <option value="Bumper Sticker">Bumper Stickers</option>
 
             </select>
         </div>
@@ -46,32 +44,36 @@
     <table class = "table">
         <thead class = "thead-dark">
         <tr>
-            <th>Item Code</th>
-            <th>Name</th>
-            <th>Item Type</th>
-
-            <th style="text-align:right">Total Inventory</th>
-            <th style="text-align:right">Sale Order</th>
-            <th style="text-align:right">Reordered</th>
-            <th>Actions</th>
+            <th style="vertical-align: middle; text-align: right">Item Code</th>
+            <th style="vertical-align: middle; text-align: center">Name</th>
+            <th style="vertical-align: middle; text-align: center">Item Type</th>
+            <th style="vertical-align: middle; text-align:right">Inventory</th>
+            <th style="vertical-align: middle; text-align:right">Sale Order</th>
+            <th style="vertical-align: middle; text-align:right">Reordered</th>
+            <th style="vertical-align: middle; text-align: center">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
-            <td th:text="${item.id}"></td>
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.itemType}"></td>
-            <td style="text-align:right" th:text="${#numbers.formatDecimal(item.inventory, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
-            <td th:text="placeholder"></td>
-            <td style="text-align:right" th:text="${#numbers.formatDecimal(item.inventoryOnReorder, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
-
-            <td>
-                <a th:href = "@{/items/reorder/{id}(id=${item.id})}">
-                    <button type = "button" class = "btn btn-primary">Reorder</button></a>
-                <a th:href = "@{/items/reorder/received/{id}(id=${item.id})}" onclick="return confirm('Confirm Reorder Received')">
-                    <button type = "button" class = "btn btn-outline-secondary">Reorder Received</button></a>
-
-
+            <td style="vertical-align: middle; text-align:right" th:text="${item.id}"></td>
+            <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
+            <td style="vertical-align: middle; text-align:center" th:text="${item.itemType}"></td>
+            <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatDecimal(item.inventory, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
+            <td style="vertical-align: middle; text-align:right" th:text="placeholder"></td>
+            <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatDecimal(item.inventoryOnReorder, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
+            <td style="vertical-align: middle; text-align:right">
+                <div class="row">
+                    <div class="col">
+                        <a th:href="@{/items/reorder/{id}(id=${item.id})}">
+                            <button type="button" class="btn btn-primary btn-block">Reorder</button>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a th:href="@{/items/reorder/received/{id}(id=${item.id})}" onclick="return confirm('Confirm Reorder Received')">
+                            <button type="button" class="btn btn-outline-secondary btn-block">Received</button>
+                        </a>
+                    </div>
+                </div>
             </td>
         </tr>
         </tbody>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Items Modify</title>
+    <title>Edit Items</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -13,10 +13,20 @@
 <div class = "container">
     <div class = "row">
         <div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class = "text-center">Edit item</h1>
+            <h1 class = "text-center">Edit Item</h1>
             <div class = "card-body">
                 <form th:action="@{/items/edit/{itemId} (itemId=${items.id})}" th:object="${items}"
                       method="post" style="max-width: 600px; margin: 0 auto;">
+                    <div class = "form-group">
+                        <label>Item Name</label>
+                        <input
+                                type = "text"
+                                name = "Item Name"
+                                th:field = "*{name}"
+                                class = "form-control"
+                                required
+                        />
+                    </div>
                     <div class = "form-group">
                         <label>Item Type</label>
                         <input
@@ -73,5 +83,20 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById("itemType").addEventListener("change", function() {
+        var itemType = this.value;
+        if (itemType === "Shirts") {
+            document.getElementById("shirtFields").style.display = "block";
+            document.getElementById("sculptureFields").style.display = "none";
+        } else if (itemType === "Sculptures") {
+            document.getElementById("shirtFields").style.display = "none";
+            document.getElementById("sculptureFields").style.display = "block";
+        } else {
+            document.getElementById("shirtFields").style.display = "none";
+            document.getElementById("sculptureFields").style.display = "none";
+        }
+    });
+</script>
 </body>
 </html>
