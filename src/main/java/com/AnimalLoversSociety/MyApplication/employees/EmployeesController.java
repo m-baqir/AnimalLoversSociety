@@ -69,14 +69,8 @@ public class EmployeesController {
                 return "employees_add";
             }
         } else {
-            Optional<Employees> employeeWithNameOptional = employeesRepository.findByEmployeeName(employee.getEmployeeName());
-            if (employeeWithNameOptional.isPresent()) {
-                model.addAttribute("error", "Employee name already exists with a different ID.");
-                return "employees_add";
-            } else {
-                employeesRepository.save(employee);
-                return "redirect:/employees";
-            }
+            employeesRepository.save(employee);
+            return "redirect:/employees";
         }
     }
 
