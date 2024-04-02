@@ -1,51 +1,46 @@
--- animalloverssociety.usertype definition
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `full_name` varchar(45) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `enabled` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+);
+ 
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`role_id`)
+);
+ 
+CREATE TABLE `users_roles` (
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  KEY `user_fk_idx` (`user_id`),
+  KEY `role_fk_idx` (`role_id`),
+  CONSTRAINT `role_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
+  CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+);
 
-CREATE TABLE `usertype` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `Type` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `roles` (`name`) VALUES ('EMPLOYEE');
+INSERT INTO `roles` (`name`) VALUES ('DONOR');
+INSERT INTO `roles` (`name`) VALUES ('MANAGEMENT');
+INSERT INTO `roles` (`name`) VALUES ('ADMIN');
 
-INSERT INTO animalloverssociety.usertype
-(id, `Type`)
-VALUES(1, 'Management');
-INSERT INTO animalloverssociety.usertype
-(id, `Type`)
-VALUES(2, 'Employee');
-INSERT INTO animalloverssociety.usertype
-(id, `Type`)
-VALUES(3, 'Donor');
 
--- animalloverssociety.`user` definition
+INSERT INTO `users` (`username`,`full_name`, `password`, `enabled`) VALUES ('patrick','patrick smith', '$2a$10$cTUErxQqYVyU2qmQGIktpup5chLEdhD2zpzNEyYqmxrHHJbSNDOG.', '1');
+INSERT INTO `users` (`username`,`full_name`, `password`, `enabled`) VALUES ('alex','alex smith', '$2a$10$.tP2OH3dEG0zms7vek4ated5AiQ.EGkncii0OpCcGq4bckS9NOULu', '1');
+INSERT INTO `users` (`username`,`full_name`, `password`, `enabled`) VALUES ('john','john smith', '$2a$10$E2UPv7arXmp3q0LzVzCBNeb4B4AtbTAGjkefVDnSztOwE7Gix6kea', '1');
+INSERT INTO `users` (`username`,`full_name`, `password`, `enabled`) VALUES ('namhm','namhm smith', '$2a$10$GQT8bfLMaLYwlyUysnGwDu6HMB5G.tin5MKT/uduv2Nez0.DmhnOq', '1');
+INSERT INTO `users` (`username`,`full_name`, `password`, `enabled`) VALUES ('admin','admin smith', '$2a$10$IqTJTjn39IU5.7sSCDQxzu3xug6z/LPU6IF0azE/8CkHCwYEnwBX.', '1');
 
-CREATE TABLE `user` (
-  `UserName` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL,
-  `id` int NOT NULL AUTO_INCREMENT,
-  `Type` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_usertype_FK` (`Type`),
-  CONSTRAINT `user_usertype_FK` FOREIGN KEY (`Type`) REFERENCES `usertype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO animalloverssociety.`user`
-(UserName, Password, id, `Type`)
-VALUES('sajjad', 'sajjadin', 1, 1);
-INSERT INTO animalloverssociety.`user`
-(UserName, Password, id, `Type`)
-VALUES('alex', 'alexin', 2, 1);
-INSERT INTO animalloverssociety.`user`
-(UserName, Password, id, `Type`)
-VALUES('employee1', 'employee1', 3, 2);
-INSERT INTO animalloverssociety.`user`
-(UserName, Password, id, `Type`)
-VALUES('employee2', 'employee2', 4, 2);
-INSERT INTO animalloverssociety.`user`
-(UserName, Password, id, `Type`)
-VALUES('donor1', 'donor1', 5, 3);
-INSERT INTO animalloverssociety.`user`
-(UserName, Password, id, `Type`)
-VALUES('donor1', 'donor1', 6, 3);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (1, 1);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (2, 2);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (3, 3);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (4, 2);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (4, 3);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (5, 4);
 
 -- animalloverssociety.customers definition
 

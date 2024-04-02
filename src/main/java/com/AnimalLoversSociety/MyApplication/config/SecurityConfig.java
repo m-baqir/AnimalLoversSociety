@@ -37,8 +37,11 @@ public class SecurityConfig {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.authorizeHttpRequests(auth -> auth.requestMatchers("/users").authenticated()
-                .anyRequest().permitAll())
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/users").hasAuthority("ADMIN")
+                .anyRequest().permitAll()
+
+        )
                 .formLogin(login -> login.usernameParameter("username")
                         .defaultSuccessUrl("/users")
                         .permitAll())

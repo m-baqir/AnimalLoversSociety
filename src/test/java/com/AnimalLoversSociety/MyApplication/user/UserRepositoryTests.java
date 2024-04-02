@@ -26,7 +26,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateUser() {
-        User user = new User("test1", "test1", "ADMIN");
+        User user = new User("test1", "test1", true, "test1");
 
         User savedUser = repo.save(user);
 
