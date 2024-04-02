@@ -100,21 +100,49 @@ public class ItemsController {
     }
 
     @PostMapping("/items/edit/{itemId}")
-    public String editItem(@PathVariable String itemId, @ModelAttribute("item") Items item, Model model) {
+    public String editItem(@PathVariable String itemId,
+                           @ModelAttribute("item") Items item,
+                           @RequestParam(value = "shirtSize", required = false) String shirtSize,
+                           @RequestParam(value = "shirtColour", required = false) String shirtColour,
+                           @RequestParam(value = "sculptureWeight", required = false) String sculptureWeight,
+                           @RequestParam(value = "sculptureHeight", required = false) String sculptureHeight
+    ) {
         long id = Long.parseLong(itemId);
-        // Get seminar from database by id
         Items existingItem = itemRepo.findById(id).get();
 
-        // Update the info
-        existingItem.setId(id);
-        existingItem.setItemType(item.getItemType());
-        existingItem.setSalePrice(item.getSalePrice());
-        existingItem.setCost(item.getCost());
-        existingItem.setInventory(item.getInventory());
-        existingItem.setProfit(item.getSalePrice() - item.getCost());
-
-        // Save updated seminar object
-        itemRepo.save(existingItem);
+        if ("Shirt".equals(existingItem.getItemType())) {
+            Shirts existingShirt = (Shirts) existingItem;
+            existingShirt.setId(id);
+            existingShirt.setItemType(item.getItemType());
+            existingShirt.setSalePrice(item.getSalePrice());
+            existingShirt.setCost(item.getCost());
+            existingShirt.setInventory(item.getInventory());
+            existingShirt.setProfit(item.getSalePrice() - item.getCost());
+            existingShirt.setColour(shirtColour);
+            existingShirt.setSize(shirtSize);
+            itemRepo.save(existingShirt);
+        } else if ("Sculpture".equals(existingItem.getItemType())) {
+            double weight = Double.parseDouble(sculptureWeight);
+            double height = Double.parseDouble(sculptureHeight);
+            Sculptures existingSculpture = (Sculptures) existingItem;
+            existingSculpture.setId(id);
+            existingSculpture.setItemType(item.getItemType());
+            existingSculpture.setSalePrice(item.getSalePrice());
+            existingSculpture.setCost(item.getCost());
+            existingSculpture.setInventory(item.getInventory());
+            existingSculpture.setProfit(item.getSalePrice() - item.getCost());
+            existingSculpture.setHeight(height);
+            existingSculpture.setWeight(weight);
+            itemRepo.save(existingSculpture);
+        } else {
+            existingItem.setId(id);
+            existingItem.setItemType(item.getItemType());
+            existingItem.setSalePrice(item.getSalePrice());
+            existingItem.setCost(item.getCost());
+            existingItem.setInventory(item.getInventory());
+            existingItem.setProfit(item.getSalePrice() - item.getCost());
+            itemRepo.save(existingItem);
+        }
         return "redirect:/items/manage";
     }
 

@@ -31,10 +31,11 @@
                         <label>Item Type</label>
                         <input
                                 type = "text"
-                                name = "Item Type"
+                                name = "itemType"
+                                id = "itemType"
                                 th:field = "*{itemType}"
                                 class = "form-control"
-                                required
+                                readonly
                         />
                     </div>
 
@@ -42,8 +43,9 @@
                         <label>Price</label>
                         <input
                                 type = "number"
+                                step = "0.01"
                                 name = "Sale Price"
-                               th:field = "*{salePrice}"
+                                th:field = "*{salePrice}"
                                 class = "form-control"
                                 required
                         />
@@ -53,6 +55,7 @@
                         <label>Cost</label>
                         <input
                                 type = "number"
+                                step = "0.01"
                                 name = "cost"
                                 th:field = "*{cost}"
                                 class = "form-control"
@@ -73,30 +76,80 @@
                         />
                     </div>
 
+                    <!-- Additional fields for shirts -->
+                    <div class="form-group" id="shirtFields" style="display: none;">
+                        <label>Shirt Size</label>
+                        <select id="shirtSize" name="shirtSize" class="form-control" required>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                        <label>Shirt Colour</label>
+
+                        <select id="shirtColour" name="shirtColour" class="form-control" required>
+                            <option value="Blue">Blue</option>
+                            <option value="Red">Red</option>
+                            <option value="Yellow">Yellow</option>
+                            <option value="Black">Black</option>
+                            <option value="White">White</option>
+                            <option value="Grey">Grey</option>
+                        </select>
+                    </div>
+
+                    <!-- Additional fields for sculptures -->
+                    <div class="form-group" id="sculptureFields" style="display: none;">
+                        <label>Sculpture Weight</label>
+                        <input type="number" step="0.01" name="sculptureWeight" class="form-control" placeholder="Enter sculpture weight">
+                        <label>Sculpture Height</label>
+                        <input type="number" step="0.01" name="sculptureHeight" class="form-control" placeholder="Enter sculpture height">
+                    </div>
+
                     <div class = "box-footer">
                         <button type = "submit" class = "btn btn-primary">
                             Submit
                         </button>
+                        <a href="/items/inventory" class="btn btn-danger">Cancel</a>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
+<!--<script>-->
+<!--    document.getElementById("itemType").addEventListener("change", function() {-->
+<!--        var itemType = this.value;-->
+<!--        if (itemType === "Shirt") {-->
+<!--            document.getElementById("shirtFields").style.display = "block";-->
+<!--            document.getElementById("sculptureFields").style.display = "none";-->
+<!--        } else if (itemType === "Sculpture") {-->
+<!--            document.getElementById("shirtFields").style.display = "none";-->
+<!--            document.getElementById("sculptureFields").style.display = "block";-->
+<!--        } else {-->
+<!--            document.getElementById("shirtFields").style.display = "none";-->
+<!--            document.getElementById("sculptureFields").style.display = "none";-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 <script>
-    document.getElementById("itemType").addEventListener("change", function() {
-        var itemType = this.value;
-        if (itemType === "Shirts") {
-            document.getElementById("shirtFields").style.display = "block";
-            document.getElementById("sculptureFields").style.display = "none";
-        } else if (itemType === "Sculptures") {
-            document.getElementById("shirtFields").style.display = "none";
-            document.getElementById("sculptureFields").style.display = "block";
+    // Function to handle display of additional fields based on item type
+    $(document).ready(function() {
+        var itemType = $("#itemType").val();
+        if (itemType === "Shirt") {
+            $("#shirtFields").show();
+            $("#sculptureFields").hide();
+        } else if (itemType === "Sculpture") {
+            $("#shirtFields").hide();
+            $("#sculptureFields").show();
         } else {
-            document.getElementById("shirtFields").style.display = "none";
-            document.getElementById("sculptureFields").style.display = "none";
+            $("#shirtFields").hide();
+            $("#sculptureFields").hide();
         }
     });
 </script>
+
 </body>
 </html>
