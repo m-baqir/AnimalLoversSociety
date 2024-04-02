@@ -1,11 +1,12 @@
 package com.AnimalLoversSociety.MyApplication.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.*;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.AnimalLoversSociety.MyApplication.user.Enums.Role;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -17,7 +18,14 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<Role> roles = user.getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
+        return authorities;
     }
 
     @Override
@@ -48,10 +56,6 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public Role getRole() {
-        return user.getRole();
     }
 
 }
