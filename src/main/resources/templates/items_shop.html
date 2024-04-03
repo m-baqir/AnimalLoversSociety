@@ -24,7 +24,6 @@
     <table class = "table">
         <thead class = "thead-dark">
         <tr>
-            <th>Image</th>
             <th>Name</th>
             <th>Price</th>
             <th>In stock</th>
@@ -42,7 +41,6 @@
             </td>
             <td th:text="${#numbers.formatCurrency(item.salePrice)}"></td>
             <td th:text="${item.inventory}"></td>
-
             <td th:if="${item.inventory != 0}">
                     <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object = "${item}" method="POST">
                     <button type = "submit" class = "btn btn-primary">Add to cart</button></form>
