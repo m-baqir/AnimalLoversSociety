@@ -20,11 +20,11 @@
                     <div class = "form-group">
                         <label>Item Name</label>
                         <input
-                                type = "text"
-                                name = "Item Name"
-                                th:field = "*{name}"
-                                class = "form-control"
-                                readonly="readonly"
+                                type="text"
+                                name="Item Name"
+                                class="form-control"
+                                readonly
+                                th:value="${items.itemType == 'Shirt' ? items.name + ' - ' + items.colour + ' / ' + items.size : items.name}"
                         />
                     </div>
 
@@ -35,7 +35,7 @@
                                 name = "Item Type"
                                 th:field = "*{itemType}"
                                 class = "form-control"
-                                readonly="readonly"
+                                readonly
                         />
                     </div>
 

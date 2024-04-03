@@ -28,6 +28,7 @@ public class Shirts extends Items {
 
     }
 
+    @Override
     public String getColour() {
         return colour;
     }
@@ -36,6 +37,7 @@ public class Shirts extends Items {
         this.colour = colour;
     }
 
+    @Override
     public String getSize() {
         return size;
     }

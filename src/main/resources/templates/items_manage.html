@@ -6,6 +6,15 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .actions-column {
+            width: 160px;
+        }
+
+        .itemsCode-column {
+            width: 105px;
+        }
+    </style>
 </head>
 <body>
 
@@ -44,21 +53,21 @@
 <table class = "table">
     <thead class = "thead-dark">
     <tr>
-        <th style="vertical-align: middle; text-align:right">Item Code</th>
-        <th style="vertical-align: middle; text-align:center">Name</th>
-        <th style="vertical-align: middle; text-align:center">Item Type</th>
+        <th style="vertical-align: middle; text-align:right" class="itemsCode-column">Item Code</th>
+        <th style="vertical-align: middle; text-align:left">Description</th>
+        <th style="vertical-align: middle; text-align:left">Item Type</th>
         <th style="vertical-align: middle; text-align:right" >Sale Price</th>
         <th style="vertical-align: middle; text-align:right" >Cost</th>
         <th style="vertical-align: middle; text-align:right" >Profit</th>
         <th style="vertical-align: middle; text-align:right" >Inventory</th>
-        <th style="vertical-align: middle; text-align:center" >Actions</th>
+        <th style="vertical-align: middle; text-align:center" class="actions-column">Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="item : ${items}">
         <td style="vertical-align: middle; text-align:right" th:text="${item.id}"></td>
-        <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
-        <td style="vertical-align: middle; text-align:center" th:text="${item.itemType}"></td>
+        <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
+        <td style="vertical-align: middle; text-align:left" th:text="${item.itemType}"></td>
         <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.getSalePrice())}"></td>
         <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.cost)}"></td>
         <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.profit)}"></td>

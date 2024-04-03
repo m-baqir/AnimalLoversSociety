@@ -76,8 +76,6 @@
                         />
                     </div>
 
-
-
                     <div class = "form-group">
                         <label>Inventory</label>
                         <input
@@ -87,6 +85,16 @@
                                 class = "form-control"
                                 placeholder="Enter starting inventory"
                                 required
+                        />
+                    </div>
+
+                    <div class = "form-group">
+                        <label>Image URL</label>
+                        <input
+                                type = "text"
+                                name = "ImageUrl"
+                                th:field = "*{imageUrl}"
+                                class = "form-control"
                         />
                     </div>
 
@@ -115,9 +123,9 @@
 
                     <!-- Additional fields for sculptures -->
                     <div class="form-group" id="sculptureFields" style="display: none;">
-                        <label>Sculpture Weight</label>
+                        <label>Sculpture Weight (kg)</label>
                         <input type="number" step="0.01" name="sculptureWeight" class="form-control" placeholder="Enter sculpture weight">
-                        <label>Sculpture Height</label>
+                        <label>Sculpture Height (inches)</label>
                         <input type="number" step="0.01" name="sculptureHeight" class="form-control" placeholder="Enter sculpture height">
                     </div>
 

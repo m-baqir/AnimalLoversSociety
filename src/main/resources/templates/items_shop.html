@@ -24,6 +24,7 @@
     <table class = "table">
         <thead class = "thead-dark">
         <tr>
+            <th>Image</th>
             <th>Name</th>
             <th>Price</th>
             <th>In stock</th>
@@ -32,7 +33,13 @@
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
-            <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
+            <td>
+                <img th:src="${item.imageUrl}" alt="Item Image" style="width: 100px; height: 100px;">
+            </td>
+<!--            <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>-->
+            <td style="vertical-align: middle">
+                <span th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></span>
+            </td>
             <td th:text="${item.salePrice}"></td>
             <td th:text="${item.inventory}"></td>
 
