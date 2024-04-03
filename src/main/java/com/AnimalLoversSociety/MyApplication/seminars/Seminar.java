@@ -1,10 +1,12 @@
 package com.AnimalLoversSociety.MyApplication.seminars;
 
+import com.AnimalLoversSociety.MyApplication.employees.Employees;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "seminars")
@@ -24,6 +26,9 @@ public class Seminar {
     private int capacity;
     @Column(nullable = false)
     private int enrolled;
+
+//    @OneToMany(mappedBy = "seminar")
+//    private List<Employees> employees;
 
     // No-arg constructor
     public Seminar() {
@@ -99,4 +104,11 @@ public class Seminar {
         this.enrolled = enrolled;
     }
 
+////    public List<Employees> getEmployees() {
+////        return employees;
+////    }
+//
+//    public void setEmployees(List<Employees> employees) {
+//        this.employees = employees;
+//    }
 }

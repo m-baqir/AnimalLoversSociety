@@ -40,6 +40,9 @@
             <td th:text = "${seminar.location}"></td>
             <td th:text = "${@seminarService.getAvailability(seminar)}"></td>
             <td>
+                <a th:href = "@{/seminars/attendance/{seminarId}(seminarId=${seminar.seminarId})}">
+                    <button type = "button" class = "btn btn-outline-secondary">Attendees</button></a>
+
                 <a th:href = "@{/seminars/edit/{seminarId}(seminarId=${seminar.seminarId})}">
                     <button type = "button" class = "btn btn-outline-secondary">Edit</button></a>
 

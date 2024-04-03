@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Seminar Attendance</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<br>
+
+<div class = "container">
+    <div class = "row align-items-center justify-content-between">
+        <div class = "col">
+            <h3 th:text = "'Attendance List for ' + ${seminar.title}" ></h3>
+        </div>
+        <div class = "col text-right">
+            <a th:href = "@{/seminars}" class = "btn btn-outline-secondary">Return to seminars</a>
+        </div>
+    </div>
+
+    <br>
+    <table class = "table">
+        <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Department</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each = "employee: ${employees}">
+            <td th:text = "${employee.employeeID}"></td>
+            <td th:text = "${employee.employeeName}"></td>
+            <td th:text = "${employee.department}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
