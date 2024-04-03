@@ -7,5 +7,5 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query
-    public Customer getCustomerByFirstNameAndLastName(String firstName, String lastName);
+    public Customer getCustomerByFirstNameAndLastNameAndStreetAddress(String firstName, String lastName, String streetAddress);
 }

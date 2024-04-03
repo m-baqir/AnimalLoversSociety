@@ -37,7 +37,8 @@ public class SaleConfig {
             }
 
 
-            if (customerRepository.getCustomerByFirstNameAndLastName("Cam","Adams") == null) {
+            if (customerRepository.getCustomerByFirstNameAndLastNameAndStreetAddress(
+                    "Cam","Adams", "246 Orange St") == null) {
                 Customer customer1 = new Customer(
                         "Cam", "Adams", "246 Orange St", "Vancouver", "BC", "V5K0A3"
                 );
@@ -45,7 +46,8 @@ public class SaleConfig {
                 sale1.setCustomer(customer1);
                 saleRepository.save(sale1);
             }
-            if (customerRepository.getCustomerByFirstNameAndLastName("Claire","Benson") == null) {
+            if (customerRepository.getCustomerByFirstNameAndLastNameAndStreetAddress(
+                    "Claire","Benson", "357 Lemon Dr") == null) {
                 Customer customer2 = new Customer(
                         "Claire", "Benson", "357 Lemon Dr", "Vancouver", "BC", "V5K0B5"
                 );

@@ -1,5 +1,6 @@
 package com.AnimalLoversSociety.MyApplication.seminars;
 
+import com.AnimalLoversSociety.MyApplication.employees.Employees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
