@@ -23,18 +23,24 @@
     <table class = "table">
         <thead class = "thead-dark">
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Actions</th>
+            <th style="vertical-align: middle; text-align:left">Image</th>
+            <th style="vertical-align: middle; text-align:left">Name</th>
+            <th style="vertical-align: middle; text-align:right">Price</th>
+            <th style="vertical-align: middle; text-align:right">Quantity</th>
+            <th style="vertical-align: middle; text-align:center">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="cartItem : ${cartItems}">
-            <td th:text="${cartItem.item.name}"></td>
-            <td th:text="${#numbers.formatCurrency(cartItem.item.salePrice)}"></td>
-            <td th:text="${cartItem.quantity}"></td>
             <td>
+                <img th:src="${cartItem.item.imageUrl}" alt="Item Image" style="width: 100px; height: 100px;">
+            </td>
+            <td style="vertical-align: middle">
+                <span th:text="${cartItem.item.itemType == 'Shirt' ? cartItem.item.name + ' - ' + cartItem.item.colour + ' / ' + cartItem.item.size : cartItem.item.itemType == 'Sculpture' ? cartItem.item.name + ' - ' + cartItem.item.weight + 'kg / ' + cartItem.item.height + '&quot;': cartItem.item.name}"></span>
+            </td>
+            <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(cartItem.item.salePrice)}"></td>
+            <td style="vertical-align: middle; text-align:right" th:text="${cartItem.quantity}"></td>
+            <td style="vertical-align: middle; text-align:center">
                 <a th:href = "@{/cart/{id}(id=${cartItem.item.id})}">
                     <button type = "button" class = "btn btn-outline-danger">Remove from cart</button></a>
             </td>

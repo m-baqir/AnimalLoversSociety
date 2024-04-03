@@ -24,11 +24,11 @@
     <table class = "table">
         <thead class = "thead-dark">
         <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>In stock</th>
-            <th>Actions</th>
+            <th style="vertical-align: middle">Image</th>
+            <th style="vertical-align: middle">Name</th>
+            <th style="vertical-align: middle; text-align:right">Price</th>
+            <th style="vertical-align: middle; text-align:right">In stock</th>
+            <th style="vertical-align: middle; text-align:center">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -36,13 +36,12 @@
             <td>
                 <img th:src="${item.imageUrl}" alt="Item Image" style="width: 100px; height: 100px;">
             </td>
-<!--            <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>-->
             <td style="vertical-align: middle">
-                <span th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></span>
+                <span th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></span>
             </td>
-            <td th:text="${#numbers.formatCurrency(item.salePrice)}"></td>
-            <td th:text="${item.inventory}"></td>
-            <td th:if="${item.inventory != 0}">
+            <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.salePrice)}"></td>
+            <td style="vertical-align: middle; text-align:right" th:text="${item.inventory}"></td>
+            <td style="vertical-align: middle; text-align:center" th:if="${item.inventory != 0}">
                     <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object = "${item}" method="POST">
                     <button type = "submit" class = "btn btn-primary">Add to cart</button></form>
             </td>
