@@ -22,10 +22,9 @@ public class EmployeeSeminarService {
     // saveRegistration
     public void saveRegistration(Employees employee, Seminar seminar) {
         EmployeeSeminar attendance = new EmployeeSeminar();
-        attendance.setEmployee(employee); // need to be returned from repository?
+        attendance.setEmployee(employee);
         attendance.setSeminar(seminar);
         employeeSeminarRepository.save(attendance);
-        // do i have to update the seminar and employees tables? don't think so because i can just save that info in this table
     }
 
     public List<Employees> getEmployeesBySeminar(Seminar seminar) {
@@ -33,7 +32,7 @@ public class EmployeeSeminarService {
         List<Employees> employees = new ArrayList<>();
         for (EmployeeSeminar employeeSeminar : attendance) {
             // for each employee-seminar relationship, take the employee and add to the list
-            employees.add(employeeSeminar.getEmployee()); // maybe have to do this through repository?
+            employees.add(employeeSeminar.getEmployee());
         }
         return employees;
     }
@@ -41,6 +40,4 @@ public class EmployeeSeminarService {
     public List<EmployeeSeminar> findByEmployeeAndSeminar(Employees employee, Seminar seminar) {
         return employeeSeminarRepository.findByEmployeeAndSeminar(employee, seminar);
     }
-
-    // error handling?
 }
