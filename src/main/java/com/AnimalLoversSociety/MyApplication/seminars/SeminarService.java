@@ -1,8 +1,10 @@
 package com.AnimalLoversSociety.MyApplication.seminars;
 
+import com.AnimalLoversSociety.MyApplication.employees.Employees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -39,5 +41,9 @@ public class SeminarService {
 
     public boolean isFull(Seminar seminar) {
         return (seminar.getEnrolled() == seminar.getCapacity());
+    }
+
+    public LocalDate getTodaysDate() {
+        return LocalDate.now();
     }
 }

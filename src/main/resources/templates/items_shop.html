@@ -40,9 +40,8 @@
             <td style="vertical-align: middle">
                 <span th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></span>
             </td>
-            <td th:text="${item.salePrice}"></td>
+            <td th:text="${#numbers.formatCurrency(item.salePrice)}"></td>
             <td th:text="${item.inventory}"></td>
-
             <td th:if="${item.inventory != 0}">
                     <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object = "${item}" method="POST">
                     <button type = "submit" class = "btn btn-primary">Add to cart</button></form>

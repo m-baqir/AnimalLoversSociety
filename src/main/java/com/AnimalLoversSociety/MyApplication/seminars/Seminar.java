@@ -1,10 +1,12 @@
 package com.AnimalLoversSociety.MyApplication.seminars;
 
+import com.AnimalLoversSociety.MyApplication.employees.Employees;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "seminars")
@@ -98,5 +100,4 @@ public class Seminar {
     public void setEnrolled(int enrolled) {
         this.enrolled = enrolled;
     }
-
 }

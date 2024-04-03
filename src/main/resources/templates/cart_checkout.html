@@ -22,7 +22,6 @@
                                 name = "firstName"
                                 field = "*{firstName}"
                                 class = "form-control"
-                                placeholder="Enter your first name"
                                 required
                         />
                     </div>
@@ -34,7 +33,6 @@
                                 name = "lastName"
                                 field = "*{lastName}"
                                 class = "form-control"
-                                placeholder="Enter your last name"
                                 required
                         />
                     </div>
@@ -46,7 +44,6 @@
                                 name = "streetAddress"
                                 field = "*{streetAddress}"
                                 class = "form-control"
-                                placeholder="Enter street address"
                                 required
                         />
                     </div>
@@ -58,37 +55,46 @@
                                 name = "city"
                                 field = "*{city}"
                                 class = "form-control"
-                                placeholder="Enter city"
                                 required
                         />
                     </div>
 
                     <div class = "form-group">
                         <label>Province</label>
-                        <input
-                                type = "text"
-                                name = "province"
-                                field = "*{province}"
-                                class = "form-control"
-                                placeholder="Enter province (two letter code)"
-                                required
-                        />
+                        <br>
+                        <select class="custom-select" th:field = "*{province}">
+                            <option value="" selected hidden>Click to select</option>
+                            <option value="AB">Alberta</option>
+                            <option value="BC">British Columbia</option>
+                            <option value="MB">Manitoba</option>
+                            <option value="NB">New Brunswick</option>
+                            <option value="NL">Newfoundland and Labrador</option>
+                            <option value="NT">Northwest Territories</option>
+                            <option value="NS">Nova Scotia</option>
+                            <option value="NU">Nunavut</option>
+                            <option value="ON">Ontario</option>
+                            <option value="PE">Prince Edward Island</option>
+                            <option value="Q'">Quebec</option>
+                            <option value="SK">Saskatchewan</option>
+                            <option value="YT">Yukon</option>
+                        </select>
                     </div>
 
                     <div class = "form-group">
-                        <label>Postal Code</label>
+                        <label>Postal Code (no spaces)</label>
                         <input
                                 type = "text"
                                 name = "postalCode"
                                 field = "*{postalCode}"
+                                maxlength="6"
                                 class = "form-control"
-                                placeholder="Enter postal code (no spaces)"
                                 required
                         />
                     </div>
 
                     <div class = "box-footer">
                         <button type = "submit" class = "btn btn-primary">Place order</button>
+                        <a th:href = "@{/cart}" class = "btn btn-outline-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

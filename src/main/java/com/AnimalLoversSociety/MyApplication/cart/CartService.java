@@ -87,7 +87,7 @@ public class CartService {
         for (CartItem cartItem : cart) {
             Sale sale = new Sale();
             long itemId = cartItem.getItem().getId();
-            Items item = itemsController.getItemById(itemId); // Need to get the item from the itemsrepository to link to  items table
+            Items item = itemsController.getItemById(itemId); // Need to get the item from the itemsrepository to link to items table
 
             sale.setItem(item);
             sale.setCustomer(customer);

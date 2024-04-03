@@ -21,7 +21,8 @@ public class CustomerService {
     }
 
     public Customer getCustomerIfPresent(Customer newCustomer) {
-        Customer customer = customerRepository.getCustomerByFirstNameAndLastName(newCustomer.getFirstName(), newCustomer.getLastName());
+        Customer customer = customerRepository.getCustomerByFirstNameAndLastNameAndStreetAddress(
+                newCustomer.getFirstName(), newCustomer.getLastName(), newCustomer.getStreetAddress());
         return customer;
     }
 
@@ -29,10 +30,10 @@ public class CustomerService {
         // If customer already present in database, update info
         Customer existingCustomer = getCustomerIfPresent(customer);
         if (existingCustomer != null) {
-            existingCustomer.setCustomerId(existingCustomer.getCustomerId());
-            existingCustomer.setFirstName(customer.getFirstName());
-            existingCustomer.setLastName(customer.getLastName());
-            existingCustomer.setStreetAddress(customer.getStreetAddress());
+//            existingCustomer.setCustomerId(existingCustomer.getCustomerId());
+//            existingCustomer.setFirstName(customer.getFirstName());
+//            existingCustomer.setLastName(customer.getLastName());
+//            existingCustomer.setStreetAddress(customer.getStreetAddress());
             existingCustomer.setCity(customer.getCity());
             existingCustomer.setProvince(customer.getProvince());
             existingCustomer.setPostalCode(customer.getPostalCode());
