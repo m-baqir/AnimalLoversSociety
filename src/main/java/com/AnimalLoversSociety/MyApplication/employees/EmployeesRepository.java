@@ -13,4 +13,6 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
 
     Optional <Employees> findById(int employeeData);
     boolean existsByEmployeeID(int employeeID);
+
+    Employees getEmployeesByEmployeeID(int employeeID); // Return a single employee
 }

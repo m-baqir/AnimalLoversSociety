@@ -22,7 +22,6 @@
                                 name = "title"
                                 field = "*{title}"
                                 class = "form-control"
-                                placeholder="Enter seminar title"
                                 required
                                 />
                         </div>
@@ -33,8 +32,8 @@
                                     type = "date"
                                     name = "date"
                                     field = "*{date}"
+                                    th:min = "${@seminarService.getTodaysDate()}"
                                     class = "form-control"
-                                    placeholder="Enter date"
                                     required
                             />
                         </div>
@@ -46,7 +45,6 @@
                                     name = "time"
                                     field = "*{time}"
                                     class = "form-control"
-                                    placeholder="Enter time"
                                     required
                             />
                         </div>
@@ -58,7 +56,6 @@
                                     name = "location"
                                     field = "*{location}"
                                     class = "form-control"
-                                    placeholder="Enter location"
                                     required
                             />
                         </div>
@@ -70,7 +67,6 @@
                                     name = "capacity"
                                     field = "*{capacity}"
                                     class = "form-control"
-                                    placeholder="Enter max capacity"
                                     required
                             />
                         </div>
