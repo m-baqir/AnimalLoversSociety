@@ -34,7 +34,7 @@ public class CartController {
     public String addItemToCart(@PathVariable long id, @ModelAttribute("item") Items item, Model model, RedirectAttributes redirectAttributes) {
         cartService.addItem(itemsController.getItemById(id));
         redirectAttributes.addFlashAttribute("message", "Success");
-        return "redirect:/items/shop";
+        return "redirect:/shop";
     }
 
     @GetMapping("/cart/{id}")
@@ -56,6 +56,6 @@ public class CartController {
         cartService.updateInventory();
         cartService.saveToSales(customerToDb);
         cartService.deleteCart();
-        return "redirect:/items/shop";
+        return "redirect:/shop";
     }
 }

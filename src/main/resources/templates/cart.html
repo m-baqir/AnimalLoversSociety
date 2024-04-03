@@ -16,7 +16,7 @@
             <h1>Shopping Cart</h1>
         </div>
         <div class = "col text-right">
-            <a th:href = "@{/items/shop}" class = "btn btn-outline-secondary">Return to shop</a>
+            <a th:href = "@{/shop}" class = "btn btn-outline-secondary">Return to shop</a>
         </div>
     </div>
 
@@ -32,12 +32,8 @@
         <tbody>
         <tr th:each="cartItem : ${cartItems}">
             <td th:text="${cartItem.item.name}"></td>
-            <td
-                    th:text="${cartItem.item.salePrice}">
-
-            </td>
+            <td th:text="${#numbers.formatCurrency(cartItem.item.salePrice)}"></td>
             <td th:text="${cartItem.quantity}"></td>
-
             <td>
                 <a th:href = "@{/cart/{id}(id=${cartItem.item.id})}">
                     <button type = "button" class = "btn btn-outline-danger">Remove from cart</button></a>
@@ -49,7 +45,7 @@
 
     <div class = "col text-right">
         <h5>Total</h5>
-        <th:block th:text="'$' + ${total}"></th:block>
+        <th:block th:text="${#numbers.formatCurrency(total)}"></th:block>
     </div>
     <br>
     <div class = "col text-right">

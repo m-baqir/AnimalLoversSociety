@@ -35,15 +35,16 @@
         <tbody>
         <tr th:each = "seminar: ${seminars}">
             <td th:text = "${seminar.title}"></td>
-            <td th:text = "${seminar.date}"></td>
-            <td th:text = "${seminar.time}"></td>
+            <td th:text = "${#temporals.format(seminar.date, 'MMMM d, yyyy')}"></td>
+            <td th:text = "${#temporals.format(seminar.time, 'h:mm a')}"></td>
             <td th:text = "${seminar.location}"></td>
             <td th:text = "${@seminarService.getAvailability(seminar)}"></td>
             <td>
                 <a th:href = "@{/seminars/edit/{seminarId}(seminarId=${seminar.seminarId})}">
                     <button type = "button" class = "btn btn-outline-secondary">Edit</button></a>
 
-                <a th:href = "@{/seminars/{seminarId}(seminarId=${seminar.seminarId})}">
+                <a th:href = "@{/seminars/{seminarId}(seminarId=${seminar.seminarId})}"
+                   onclick="return confirm('Confirm Deletion\nOnce deleted, seminar cannot be recovered.')">
                     <button type = "button" class = "btn btn-outline-danger">Delete</button></a>
             </td>
         </tr>
