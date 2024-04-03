@@ -104,6 +104,7 @@ public class ItemsController {
         if ("Shirt".equals(existingItem.getItemType())) {
             Shirts existingShirt = (Shirts) existingItem;
             existingShirt.setId(id);
+            existingShirt.setName(item.getName());
             existingShirt.setItemType(item.getItemType());
             existingShirt.setSalePrice(item.getSalePrice());
             existingShirt.setCost(item.getCost());
@@ -118,6 +119,7 @@ public class ItemsController {
             double height = Double.parseDouble(sculptureHeight);
             Sculptures existingSculpture = (Sculptures) existingItem;
             existingSculpture.setId(id);
+            existingSculpture.setName(item.getName());
             existingSculpture.setItemType(item.getItemType());
             existingSculpture.setSalePrice(item.getSalePrice());
             existingSculpture.setCost(item.getCost());
@@ -129,6 +131,7 @@ public class ItemsController {
             itemRepo.save(existingSculpture);
         } else {
             existingItem.setId(id);
+            existingItem.setName(item.getName());
             existingItem.setItemType(item.getItemType());
             existingItem.setSalePrice(item.getSalePrice());
             existingItem.setCost(item.getCost());
