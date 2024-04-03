@@ -15,7 +15,8 @@ import java.util.List;
 public class Items {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //- this is supposed to autogenerate a number everytime object is created, but was having trouble getting to work
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //- this is supposed to autogenerate a number everytime object is created, but was having trouble getting to work
     public long id;
 
     @Column(nullable = false) // sets the item_type column to not nullable
@@ -39,13 +40,14 @@ public class Items {
     @Column
     private long inventoryOnReorder;
 
-
-
     @Column
     private double profit;
 
     @Column
     private String name;
+
+    @Column
+    private String imageUrl;
 
 //    @OneToMany(mappedBy = "item")
 //    private List<Sale> sales;
@@ -65,6 +67,7 @@ public class Items {
         replenishArrivalDate = null;
         replenishOrderedDate = new Date();
         inventoryOnReorder = 0;
+        imageUrl = "";
     }
 
     //setters and getters for items
@@ -107,6 +110,7 @@ public class Items {
     public void setId(long id) {
         this.id = id;
     }
+
     public double getProfit() {
         return profit;
     }
@@ -147,5 +151,27 @@ public class Items {
         this.name = name;
     }
 
+    public Double getHeight() {
+        return null;
+    }
 
+    public Double getWeight() {return null;}
+
+    public String getSize() {return null;}
+
+    public String getColour() {return null;}
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
+
+
+
+
+
+

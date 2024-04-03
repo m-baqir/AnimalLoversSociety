@@ -13,8 +13,8 @@ public class Sculptures extends Items {
 
 
 
-    private double weight;
-    private double height;
+    private Double weight;
+    private Double height;
 
 
     Sculptures(String name, double salePrice, double cost, long inventory, double weight, double height) {
@@ -28,8 +28,8 @@ public class Sculptures extends Items {
     public Sculptures() {
 
     }
-
-    public double getWeight() {
+    @Override
+    public Double getWeight() {
         return weight;
     }
 
@@ -37,11 +37,12 @@ public class Sculptures extends Items {
         this.weight = weight;
     }
 
-    public double getHeight() {
+    @Override
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 }

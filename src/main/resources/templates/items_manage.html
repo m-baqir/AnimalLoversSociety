@@ -57,7 +57,7 @@
     <tbody>
     <tr th:each="item : ${items}">
         <td style="vertical-align: middle; text-align:right" th:text="${item.id}"></td>
-        <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.size + ' / ' + item.colour : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
+        <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
         <td style="vertical-align: middle; text-align:center" th:text="${item.itemType}"></td>
         <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.getSalePrice())}"></td>
         <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.cost)}"></td>
