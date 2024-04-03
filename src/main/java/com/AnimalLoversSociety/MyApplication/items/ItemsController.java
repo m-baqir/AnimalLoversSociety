@@ -156,7 +156,7 @@ public class ItemsController {
         return "redirect:/items/inventory";
     }
 
-    @GetMapping(path = "/items/shop")
+    @GetMapping(path = "/shop")
     public String showItemsShopPage(Model model) {
         model.addAttribute("items", itemRepo.findAll());
         return "items_shop";
