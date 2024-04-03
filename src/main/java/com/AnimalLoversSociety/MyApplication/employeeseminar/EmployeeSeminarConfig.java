@@ -41,7 +41,7 @@ public class EmployeeSeminarConfig {
                     LocalTime.parse("10:00"),
                     "Shelter",
                     20,
-                    0);
+                    1);
             if (seminarRepository.findByTitle("Dog Training").isEmpty()) {
                 seminarRepository.save(seminar);
                 attendance.setSeminar(seminar);

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class EmployeeSeminarController {
     private final EmployeeSeminarService employeeSeminarService;
     private final SeminarService seminarService;
-    private final EmployeesRepository employeesRepository; // is this the same as the other?
+    private final EmployeesRepository employeesRepository;
 
     @Autowired
     public EmployeeSeminarController(EmployeeSeminarService employeeSeminarService, SeminarService seminarService, EmployeesRepository employeesRepository) {
@@ -34,14 +34,6 @@ public class EmployeeSeminarController {
         return "seminars_attendance";
     }
 
-//    @PostMapping("/seminars/register/{seminarId}")
-//    public String processRegistration(@PathVariable Integer seminarId, @ModelAttribute("seminar") Seminar seminar, Model model) {
-//        Seminar seminarForRegistration = seminarService.getSeminarById(seminarId);
-//        seminarService.incrementEnrollment(seminarForRegistration);
-//        seminarService.saveSeminar(seminarForRegistration);
-//        return "redirect:/seminars";
-//    }
-
     @PostMapping("/seminars/register/{seminarId}")
     public String processRegistration(@PathVariable Integer seminarId,
                                       @ModelAttribute("employee") Employees employee,
@@ -53,26 +45,19 @@ public class EmployeeSeminarController {
             return "redirect:/seminars/register/{seminarId}";
         }
 
+        Employees employeeRegistering = employeesRepository.getEmployeesByEmployeeID(employee.getEmployeeID());
+        Seminar seminarForRegistration = seminarService.getSeminarById(seminarId);
 
-
-//        // Check if employee is already registered for this seminar
-//        if (!(employeeSeminarService.findByEmployeeAndSeminar(employeeRegistering, seminarForRegistration)).isEmpty()) {
-//            System.out.print("test");
-//            redirectAttributes.addFlashAttribute("message","Already registered for this seminar");
-//            return "redirect:/seminars";
-//        }
+        // Check if employee is already registered for this seminar
+        if (!(employeeSeminarService.findByEmployeeAndSeminar(employeeRegistering, seminarForRegistration)).isEmpty()) {
+            redirectAttributes.addFlashAttribute("message","Already registered for this seminar");
+            return "redirect:/seminars/register/{seminarId}";
+        }
         else {
-            Employees employeeRegistering = employeesRepository.getEmployeesByEmployeeID(employee.getEmployeeID());
-            Seminar seminarForRegistration = seminarService.getSeminarById(seminarId);
             seminarService.incrementEnrollment(seminarForRegistration);
             seminarService.saveSeminar(seminarForRegistration);
             employeeSeminarService.saveRegistration(employeeRegistering, seminarForRegistration);
         }
         return "redirect:/seminars";
     }
-//    @GetMapping("/suggest-event")
-//    public String suggestEvent() {
-//        return "/suggested-event/suggestEvent";
-//    }
-
 }

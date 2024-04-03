@@ -27,9 +27,6 @@ public class Seminar {
     @Column(nullable = false)
     private int enrolled;
 
-//    @OneToMany(mappedBy = "seminar")
-//    private List<Employees> employees;
-
     // No-arg constructor
     public Seminar() {
     }
@@ -103,12 +100,4 @@ public class Seminar {
     public void setEnrolled(int enrolled) {
         this.enrolled = enrolled;
     }
-
-////    public List<Employees> getEmployees() {
-////        return employees;
-////    }
-//
-//    public void setEmployees(List<Employees> employees) {
-//        this.employees = employees;
-//    }
 }
