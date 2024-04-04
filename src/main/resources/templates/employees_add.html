@@ -2,34 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <br>
     <title>Add Employee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Add Employee</h1>
-    <form action="/employees/add" method="post" th:object="${employee}">
-        <label for="employeeID">Employee ID:</label>
-        <input type="text" id="employeeID" name="employeeID" required><br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-center card">
+    <h1 class="text-center">Add Employee</h1>
+    <div class="card-body">
+    <form action="/employees/add" method="post" th:object="${employee}" style="max-width: 600px; margin: 0 auto;">
+        <label for="employeeID">Employee ID</label>
+        <input type="text" id="employeeID" name="employeeID" class="form-control" required><br>
         <p th:if="${error}" th:text="${error}" style="color: red;">This ID exists.</p>
         
-        <label for="employeeName">Employee Name:</label>
-        <input type="text" id="employeeName" name="employeeName" required><br>
+        <label for="employeeName">Employee Name</label>
+        <input type="text" id="employeeName" name="employeeName" class="form-control" required><br>
         
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required><br>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" class="form-control" required><br>
         
-        <label for="salary">Salary:</label>
-        <input type="text" id="salary" name="salary" required><br>
+        <label for="salary">Salary</label>
+        <input type="text" id="salary" name="salary" class="form-control" required><br>
         
-        <label for="department">Department:</label>
-        <input type="text" id="department" name="department" required><br>
+        <label for="department">Department</label>
+        <input type="text" id="department" name="department" class="form-control" required><br>
         
-        <label for="supervisor">Supervisor:</label>
-        <input type="text" id="supervisor" name="supervisor" required><br>
+        <label for="supervisor">Supervisor</label>
+        <input type="text" id="supervisor" name="supervisor" class="form-control" required><br>
         
-        <label for="project">Project:</label>
-        <input type="text" id="project" name="project" required><br>
+        <label for="project">Project</label>
+        <input type="text" id="project" name="project" class="form-control" required><br>
         
-        <input type="submit" value="Add Employee">
+        <input type="submit" value="Add Employee" class="btn btn-primary">
     </form>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>
