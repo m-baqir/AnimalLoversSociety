@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th = "http://thymeleaf.org" xmlns:sec = "https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset = "ISO-8859-1">
     <title>Manage Items</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel = "stylesheet" type = "text/css" href = "/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type = "text/javascript" src = "/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src = "/webjars/bootstrap/js/bootstrap.min.js"></script>
     <style>
         .actions-column {
             width: 160px;
         }
-
         .itemsCode-column {
             width: 105px;
         }
-
         .sign-out {
             position: absolute;
             top: 10px;
@@ -26,8 +24,8 @@
 
 <br>
 <div class = "container">
-    <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out" style="text-align: center">
-        <form th:action="@{/logout}" method="post">
+    <div th:if = "${#authorization.expression('isAuthenticated()')}" class = "sign-out" style = "text-align: center">
+        <form th:action = "@{/logout}" method = "post">
             <p>
                 Welcome <b><span sec:authentication="principal.username"></span></b>
             </p>
@@ -35,31 +33,30 @@
         </form>
     </div>
     <div class = "row align-items-center justify-content-between">
-    <div class = "col">
-        <h1>Manage Items</h1>
-    </div>
-    <div class = "col text-right">
-        <a th:href = "@{/items/create}" class>
-            <button type = "button" class = "btn btn-primary">Add Item</button></a>
-        <a th:href = "@{/items}">
-            <button type = "button" class = "btn btn-outline-danger">Items Homepage</button></a>
-    </div>
+        <div class = "col">
+            <h1>Manage Items</h1>
         </div>
+        <div class = "col text-right">
+            <a th:href = "@{/items/create}" class>
+                <button type = "button" class = "btn btn-primary">Add Item</button></a>
+            <a th:href = "@{/items}">
+                <button type = "button" class = "btn btn-outline-danger">Items Homepage</button></a>
+        </div>
+    </div>
 
-    <div class="row align-items-center justify-content-end">
-        <div class="col md-auto">
-            <input type="text" id="searchInput" placeholder="Search...">
+    <div class = "row align-items-center justify-content-end">
+        <div class = "col md-auto">
+            <input type = "text" id = "searchIn" placeholder = "Search...">
         </div>
         <div class="col-md-auto">
-            <label for="filterItemType">Filter by Item Type:</label>
-            <select id="filterItemType" onchange="filterTable()">
-                <option value="">All</option>
-                <option value="Book">Books</option>
-                <option value="Video">Videos</option>
-                <option value="Shirt">Shirts</option>
-                <option value="Sculpture">Sculptures</option>
-                <option value="Bumper Sticker">Bumper Stickers</option>
-
+            <label for = "filterItemType">Filter by Item Type:</label>
+            <select id = "filterItemType" onchange="filterTable()">
+                <option value = "">All</option>
+                <option value = "Book" >Books</option>
+                <option value = "Video" >Videos</option>
+                <option value = "Shirt" >Shirts</option>
+                <option value = "Sculpture" >Sculptures</option>
+                <option value = "Bumper Sticker" >Bumper Stickers</option>
             </select>
         </div>
     </div>
@@ -67,26 +64,26 @@
 <table class = "table">
     <thead class = "thead-dark">
     <tr>
-        <th style="vertical-align: middle; text-align:right" class="itemsCode-column">Item Code</th>
-        <th style="vertical-align: middle; text-align:left">Description</th>
-        <th style="vertical-align: middle; text-align:left">Item Type</th>
-        <th style="vertical-align: middle; text-align:right" >Sale Price</th>
-        <th style="vertical-align: middle; text-align:right" >Cost</th>
-        <th style="vertical-align: middle; text-align:right" >Profit</th>
-        <th style="vertical-align: middle; text-align:right" >Inventory</th>
-        <th style="vertical-align: middle; text-align:center" class="actions-column">Actions</th>
+        <th style = "vertical-align: middle; text-align:right" class = "itemsCode-column">Item Code</th>
+        <th style = "vertical-align: middle; text-align:left">Description</th>
+        <th style = "vertical-align: middle; text-align:left">Item Type</th>
+        <th style = "vertical-align: middle; text-align:right" >Sale Price</th>
+        <th style = "vertical-align: middle; text-align:right" >Cost</th>
+        <th style = "vertical-align: middle; text-align:right" >Profit</th>
+        <th style = "vertical-align: middle; text-align:right" >Inventory</th>
+        <th style = "vertical-align: middle; text-align:center" class="actions-column">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="item : ${items}">
-        <td style="vertical-align: middle; text-align:right" th:text="${item.id}"></td>
-        <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
-        <td style="vertical-align: middle; text-align:left" th:text="${item.itemType}"></td>
-        <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.getSalePrice())}"></td>
-        <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.cost)}"></td>
-        <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.profit)}"></td>
-        <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatDecimal(item.inventory, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
-        <td style="vertical-align: middle; text-align:right" >
+    <tr th:each = "item : ${items}">
+        <td style = "vertical-align: middle; text-align:right" th:text="${item.id}"></td>
+        <td style = "vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
+        <td style = "vertical-align: middle; text-align:left" th:text="${item.itemType}"></td>
+        <td style = "vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.getSalePrice())}"></td>
+        <td style = "vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.cost)}"></td>
+        <td style = "vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.profit)}"></td>
+        <td style = "vertical-align: middle; text-align:right" th:text="${#numbers.formatDecimal(item.inventory, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
+        <td style = "vertical-align: middle; text-align:right" >
             <a th:href = "@{/items/edit/{id}(id=${item.id})}">
                 <button type = "button" class = "btn btn-outline-secondary">Edit</button></a>
             <a th:href = "@{/items/delete/{id}(id=${item.id})}" onclick="return confirm('Confirm Deletion\nOnce deleted, item cannot be recovered.')">
@@ -98,7 +95,7 @@
 </div>
 <script>
     $(document).ready(function(){
-        $("#searchInput").on("keyup", function() {
+        $("#searchIn").on("keyup", function()   {
             var value = $(this).val().toLowerCase();
             $(".table tbody tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -107,26 +104,17 @@
     });
 </script>
 
+<!--filter table by itemType script-->
 <script>
     function filterTable() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("filterItemType");
-        filter = input.value.toUpperCase();
-        table = document.querySelector(".table");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2]; // Index 2 corresponds to Item Type column
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1 || filter === '') {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
+        const filter = document.getElementById("filterItemType").value.toUpperCase();
+        const rows = document.querySelectorAll(".table tbody tr");
+
+        rows.forEach(row => {
+            const itemType = row.cells[2].textContent.toUpperCase();
+            row.style.display = itemType.includes(filter) || filter === '' ? "" : "none";
+        });
     }
 </script>
-
 </body>
 </html>

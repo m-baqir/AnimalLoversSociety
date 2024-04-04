@@ -11,23 +11,19 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("2") // this is used to differentiate from different objects on the same table
 public class Sculptures extends Items {
 
-
-
     private Double weight;
     private Double height;
-
 
     Sculptures(String name, double salePrice, double cost, long inventory, double weight, double height) {
         super(name, "Sculpture", salePrice, cost, inventory);
         this.weight = weight;
         this.height = height;
-
     }
-
 
     public Sculptures() {
-
     }
+
+    //Setter and Getter Methods
     @Override
     public Double getWeight() {
         return weight;

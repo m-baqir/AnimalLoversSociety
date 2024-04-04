@@ -96,34 +96,74 @@
                         />
                     </div>
 
-                    <!-- Additional fields for shirts -->
+                    <!-- Conditional fields for shirts -->
                     <div class="form-group" id="shirtFields" style="display: none;">
                         <label>Shirt Size</label>
+<!--                        dropdown for shirt size-->
                         <select id="shirtSize" name="shirtSize" class="form-control">
-                            <option value="XS" th:selected="${items.size == 'XS'}">XS</option>
-                            <option value="S" th:selected="${items.size == 'S'}">S</option>
-                            <option value="M" th:selected="${items.size == 'M'}">M</option>
-                            <option value="L" th:selected="${items.size == 'L'}">L</option>
-                            <option value="XL" th:selected="${items.size == 'XL'}">XL</option>
-                            <option value="XXL" th:selected="${items.size == 'XXL'}">XXL</option>
+                            <option value="XS" th:selected="${items.size == 'XS'}">
+                                XS
+                            </option>
+                            <option value="S" th:selected="${items.size == 'S'}">
+                                S
+                            </option>
+                            <option value="M" th:selected="${items.size == 'M'}">
+                                M
+                            </option>
+                            <option value="L" th:selected="${items.size == 'L'}">
+                                L
+                            </option>
+                            <option value="XL" th:selected="${items.size == 'XL'}">
+                                XL
+                            </option>
+                            <option value="XXL" th:selected="${items.size == 'XXL'}">
+                                XXL
+                            </option>
                         </select>
                         <label>Shirt Colour</label>
+<!--                        dropdown for selecting shirt colour-->
                         <select id="shirtColour" name="shirtColour" class="form-control">
-                            <option value="Blue" th:selected="${items.colour == 'Blue'}">Blue</option>
-                            <option value="Red" th:selected="${items.colour == 'Red'}">Red</option>
-                            <option value="Yellow" th:selected="${items.colour == 'Yellow'}">Yellow</option>
-                            <option value="Black" th:selected="${items.colour == 'Black'}">Black</option>
-                            <option value="White" th:selected="${items.colour == 'White'}">White</option>
-                            <option value="Grey" th:selected="${items.colour == 'Grey'}">Grey</option>
+                            <option value="Blue" th:selected="${items.colour == 'Blue'}">
+                                Blue
+                            </option>
+                            <option value="Red" th:selected="${items.colour == 'Red'}">
+                                Red
+                            </option>
+                            <option value="Yellow" th:selected="${items.colour == 'Yellow'}">
+                                Yellow
+                            </option>
+                            <option value="Black" th:selected="${items.colour == 'Black'}">
+                                Black
+                            </option>
+                            <option value="White" th:selected="${items.colour == 'White'}">
+                                White
+                            </option>
+                            <option value="Grey" th:selected="${items.colour == 'Grey'}">
+                                Grey
+                            </option>
                         </select>
                     </div>
 
-                    <!-- Additional fields for sculptures -->
+                    <!-- Conditional fields for sculptures -->
                     <div class="form-group" id="sculptureFields" style="display: none;">
                         <label>Sculpture Weight (kg)</label>
-                        <input type="number" step="0.01" name="sculptureWeight" class="form-control" th:value="*{weight}" placeholder="Enter sculpture weight">
+                        <input
+                                type="number"
+                                step="0.01"
+                                name="sculptureWeight"
+                                class="form-control"
+                                th:value="*{weight}"
+                                placeholder="Enter sculpture weight"
+                        >
                         <label>Sculpture Height (inches)</label>
-                        <input type="number" step="0.01" name="sculptureHeight" class="form-control" th:value="*{height}" placeholder="Enter sculpture weight">
+                        <input
+                                type="number"
+                                step="0.01"
+                                name="sculptureHeight"
+                                class="form-control"
+                                th:value="*{height}"
+                                placeholder="Enter sculpture weight"
+                        >
                     </div>
                     <div class = "box-footer">
                         <button type = "submit" class = "btn btn-primary">

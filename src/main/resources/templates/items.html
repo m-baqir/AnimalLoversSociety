@@ -3,7 +3,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Items</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <style>
@@ -21,14 +21,30 @@
             <p>
                 Welcome <b><span sec:authentication="principal.username"></span></b>
             </p>
-            <input type="submit" value="Sign Out" />
+            <input type="submit" value="Sign Out"/>
         </form>
     </div>
     <h1>Items and Inventory</h1>
-    <h3><a th:href="@{/items/inventory}">Inventory</a></h3>
-    <h3><a th:href="@{/items/create}">Add new Item</a></h3>
-    <h3><a th:href="@{/items/manage}">Manage Items</a></h3>
-    <h3><a th:href="@{/}">Return to Homepage</a></h3>
+    <h3>
+        <a th:href="@{/items/inventory}">
+            Inventory
+        </a>
+    </h3>
+    <h3>
+        <a th:href="@{/items/create}">
+            Add new Item
+        </a>
+    </h3>
+    <h3>
+        <a th:href="@{/items/manage}">
+            Manage Items
+        </a>
+    </h3>
+    <h3>
+        <a th:href="@{/}">
+            Return to Homepage
+        </a>
+    </h3>
 </div>
 </body>
 </html>
