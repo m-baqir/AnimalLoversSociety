@@ -27,11 +27,12 @@
                         <th>Username</th>
                         <th>Password</th>
                         <th>Full Name</th>
+                        <th>Role(s)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="user : ${users}">
-                        <td th:text="${user.username}"></td>
+                        <td><a th:href="@{/users/{username}(username=${user.username})}" th:text="${user.username}"></a></td>
                         <td th:text="${user.password}"></td>
                         <td th:text="${user.full_name}"></td>
                     </tr>

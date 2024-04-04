@@ -3,31 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Employee List</h1>
-    <form action="/employees/filter" method="get">
-        <label for="department">Filter by Department:</label>
-        <select id="department" name="department">
+<br>
+
+    <div class="container">
+        <div class="row-align-items-center justify-content-between">
+            <div class="col">
+                <h1>Employee List</h1>
+            </div>
+
+    <div class="col text-right">
+    <form action="/employees/filter" method="get" class="row">
+        <div class="col-md-4">
+        <select id="department" name="department" class="form-select">
             <option value="">All Departments</option>
             <option value="Production">Production</option>
             <option value="Marketing">Marketing</option>
             <option value="VA">VA</option>
             <option value="Talent Acquisition">Talent Acquisition</option>
         </select>
-        <label for="project">Filter by Project:</label>
-        <select id="project" name="project">
+        </div>
+        <div class="col-md-4">
+        <select id="project" name="project" class="form-select">
             <option value="">All Projects</option>
             <option value="AGOC">AGOC</option>
             <option value="DFAS">DFAS</option>
             <option value="OLNO">OLNO</option>
         </select>
-        <input type="submit" value="Filter">
+        </div>
+        <div class="col-md-4">
+        <input type="submit" value="Filter" class="btn btn-primary">
+        </div>
+    </div>
     </form>
-    
-    <h2>Employee Details</h2>
-    <table border="1">
-        <thead>
+    <br>
+    <table class="table">
+        <thead class="table-dark">
             <tr>
                 <th>Employee Data</th>
                 <th>Employee ID</th>
@@ -63,19 +76,19 @@
         </tbody>
     </table>
     
-    <!--action buttons to add, modify, remove employees-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <div class="row">
-        <div class="col">
+    <div class="row align-items-center justify-content-between">
+        <div class="col text-center">
             <a href="/employees/add" class="btn btn-primary">Add Employee</a><br>
         </div>
-        <div class="col">
+        <div class="col text-center">
             <a href="/employees/modify" class="btn btn-primary">Modify Employee</a><br>
         </div>
-        <div class="col">
+        <div class="col text-center">
             <a href="/employees/delete" class="btn btn-danger">Delete Employee</a><br>
         </div>
     </div>
+<br>
 
 </body>
 </html>
