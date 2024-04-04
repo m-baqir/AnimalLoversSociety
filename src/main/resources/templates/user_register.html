@@ -16,6 +16,13 @@
             method="post" style="max-width: 600px; margin: 0 auto;">
         <div class="m-3">
             <div class="form-group row">
+                <label class="col-4 col-form-label">Full Name: </label>
+                <div class="col-8">
+                    <input type="text" th:field="*{full_name}" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-4 col-form-label">Username: </label>
                 <div class="col-8">
                     <input type="text" th:field="*{username}" class="form-control" required />
@@ -31,16 +38,20 @@
             </div>
              
             <div class="form-group row">
-                <label class="col-4 col-form-label">Role: </label>
+                <label class="col-4 col-form-label">Enabled: </label>
                 <div class="col-8">
-                    <select th:field="*{role}" class="form-control">
-                        <option value="EMPLOYEE">Employee</option>
-                        <option value="ADMIN">Admin</option>
-                        <option value="MANAGEMENT">Management</option>
-                        <option value="DONOR">Donor</option>
-                    </select>
+                    <input type="checkbox" th:field="*{enabled}" class="form-check" />
                 </div>
             </div>
+            <!-- need to figure out how to assign role with a manytomany relationship when registering -->
+            <!-- <div class="form-group row">
+                <label class="col-4 col-form-label">Role: </label>
+                <div class="col-8">
+                    <select th:field="*{role}" class="form-control"></select>
+                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                    </select>
+                </div>
+            </div> -->
              
             <div>
                 <button type="submit" class="btn btn-primary">Sign Up</button>
