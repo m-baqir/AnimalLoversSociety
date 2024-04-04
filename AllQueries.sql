@@ -63,30 +63,52 @@ INSERT INTO animalloverssociety.customers (CustomerID,FirstName,LastName,StreetA
 -- animalloverssociety.items definition - AP
 
 CREATE TABLE `items` (
-  `itemCode` int NOT NULL,
-  `itemType` varchar(45) DEFAULT NULL,
-  `salePrice` double DEFAULT NULL,
+  `product_type` int NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `cost` double DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `inventory` bigint NOT NULL,
+  `inventory_on_reorder` bigint DEFAULT NULL,
+  `item_type` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `profit` double DEFAULT NULL,
-  `inventory` int DEFAULT NULL,
-  PRIMARY KEY (`itemCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `replenish_arrival_date` datetime(6) DEFAULT NULL,
+  `replenish_ordered_date` datetime(6) DEFAULT NULL,
+  `sale_price` double NOT NULL,
+  `height` double DEFAULT NULL,
+  `weight` double DEFAULT NULL,
+  `colour` varchar(255) DEFAULT NULL,
+  `size` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
 
 INSERT INTO animalloverssociety.items
-(itemCode, itemType, salePrice, cost, profit, inventory)
-VALUES(1, 'book', 10.0, 2.0, 0.0, 50);
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(0, 1, 16.0, 'https://m.media-amazon.com/images/I/71WUlaKVG-L._AC_UF1000,1000_QL80_.jpg', 300, 0, 'Book', 'The Animal Book', 4.0, NULL, '2024-04-02 21:36:34.315000', 20.0, NULL, NULL, NULL, NULL);
 INSERT INTO animalloverssociety.items
-(itemCode, itemType, salePrice, cost, profit, inventory)
-VALUES(2, 'video', 5.0, 1.0, 0.0, 100);
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(0, 2, 12.0, 'https://t3.ftcdn.net/jpg/03/64/22/10/360_F_364221077_uNO8UQVdGdlRo0ibhT0ULoJrqEUHnoGY.jpg', 400, 0, 'Video', 'ALS''s Funny Dog Compilation', 3.0, NULL, '2024-04-02 21:36:34.383000', 15.0, NULL, NULL, NULL, NULL);
 INSERT INTO animalloverssociety.items
-(itemCode, itemType, salePrice, cost, profit, inventory)
-VALUES(3, 'tape', 7.0, 1.0, 0.0, 55);
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(1, 4, 12.0, 'https://m.media-amazon.com/images/I/A1-rkBsnj+L._CLa%7C2140%2C2000%7C61SUppDYcFL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SL1500_.png', 75, 75, 'Shirt', 'I Love Dogs', 12.989999999999998, '2024-04-10 00:00:00', '2024-04-03 17:52:39.438000', 24.99, NULL, NULL, 'Blue', 'XS');
 INSERT INTO animalloverssociety.items
-(itemCode, itemType, salePrice, cost, profit, inventory)
-VALUES(4, 'shirt', 20.0, 5.0, 0.0, 45);
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(1, 5, 12.0, 'https://m.media-amazon.com/images/I/A1-rkBsnj+L._CLa%7C2140%2C2000%7C61SUppDYcFL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SL1500_.png', 50, 75, 'Shirt', 'I Love Dogs', 12.989999999999998, '2024-04-10 00:00:00', '2024-04-03 17:52:39.438000', 24.99, NULL, NULL, 'Blue', 'S');
 INSERT INTO animalloverssociety.items
-(itemCode, itemType, salePrice, cost, profit, inventory)
-VALUES(5, 'sculpture', 50.0, 30.0, 0.0, 20);
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(1, 6, 12.0, 'https://m.media-amazon.com/images/I/A1-rkBsnj+L._CLa%7C2140%2C2000%7C61SUppDYcFL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SL1500_.png', 40, 75, 'Shirt', 'I Love Dogs', 12.989999999999998, '2024-04-10 00:00:00', '2024-04-03 17:52:39.438000', 24.99, NULL, NULL, 'Blue', 'M');
+INSERT INTO animalloverssociety.items
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(1, 7, 12.0, 'https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C61hBW6dmEUL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_UY1000_.png', 65, 75, 'Shirt', 'I Love Dogs', 12.989999999999998, '2024-04-10 00:00:00', '2024-04-03 17:52:39.438000', 24.99, NULL, NULL, 'Black', 'L');
+INSERT INTO animalloverssociety.items
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(1, 8, 12.0, 'https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C61hBW6dmEUL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_UY1000_.png', 80, 75, 'Shirt', 'I Love Dogs', 12.989999999999998, '2024-04-10 00:00:00', '2024-04-03 17:52:39.438000', 24.99, NULL, NULL, 'Black', 'XL');
+INSERT INTO animalloverssociety.items
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(2, 9, 32.05, 'https://m.media-amazon.com/images/I/41JEqx3VrnS.jpg', 30, 0, 'Sculpture', 'Peein'' Frenchie', 27.93, NULL, '2024-04-03 18:45:28.445000', 59.98, 30.0, 20.0, NULL, NULL);
+INSERT INTO animalloverssociety.items
+(product_type, id, cost, image_url, inventory, inventory_on_reorder, item_type, name, profit, replenish_arrival_date, replenish_ordered_date, sale_price, height, weight, colour, `size`)
+VALUES(0, 10, 2.59, 'https://i.ebayimg.com/images/g/8cQAAMXQVT9TDu5E/s-l1200.webp', 1000, 0, 'Bumper Sticker', 'Life Is Better With A Cat', 7.9, NULL, NULL, 10.49, NULL, NULL, NULL, NULL);
 
 
 -- animalloverssociety.sales definition
