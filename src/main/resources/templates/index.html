@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="ISO-8859-1">
     <title>Animal Lovers Society</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .sign-out {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container text-center">
         <h1>Welcome to Animal Lovers Society</h1>
-        <h3><a th:href="@{/users}">List of Users</a></h3>
-        <h3><a th:href="@{/user_register}">Register</a></h3>
-        <h3><a th:href="@{/login}">Login</a></h3>
-        <h3><a th:href="@{/employees}">Employees</a></h3>
-        <h3><a th:href="@{/projects}">Projects</a></h3>
-        <h3><a th:href="@{/donors}">Donors</a></h3>
-        <h3><a th:href="@{/items}">Items and Inventory</a></h3>
-        <h3><a th:href="@{/shop}">Shop</a></h3>
-        <h3><a th:href="@{/sales}">Sales</a></h3>
-        <h3><a th:href="@{/seminars}">Seminars</a></h3>
+        <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out">
+            <form th:action="@{/logout}" method="post">
+                <p>
+                    Welcome <b><span sec:authentication="principal.username"></span></b>
+                </p>
+                <input type="submit" value="Sign Out" />
+            </form>
+        </div>
+        <h3 th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a th:href="@{/users}">List of Users</a></h3>
+        <h3 th:unless="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/user_register}">Register</a></h3>
+        <h3 th:unless="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/login}">Login</a></h3>
+        <h3 th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a th:href="@{/employees}">Employees</a></h3>
+        <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/projects}">Projects</a></h3>
+        <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/donors}">Donors</a></h3>
+        <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/items}">Items and Inventory</a></h3>
+        <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'', ''MEMBER'')')}"><a th:href="@{/shop}">Shop</a></h3>
+        <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/sales}">Sales</a></h3>
+        <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/seminars}">Seminars</a></h3>
     </div>
+
 
 </body>
 </html>

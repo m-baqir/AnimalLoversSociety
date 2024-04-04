@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="ISO-8859-1">
     <title>Shop</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .sign-out {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
 
 <br>
 <div class = "container">
+    <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out" style="text-align: center">
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b><span sec:authentication="principal.username"></span></b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
     <div class = "row align-items-center justify-content-between">
         <div class = "col">
             <h1>Shop</h1>
         </div>
         <div class = "col text-right">
-            <a th:href = "@{/items}" class = "btn btn-outline-secondary">Items homepage</a>
+            <a th:href = "@{/}" class = "btn btn-outline-secondary">Homepage</a>
             <a th:href = "@{/cart}" class = "btn btn-primary">View cart</a>
         </div>
     </div>
@@ -33,22 +48,43 @@
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
-            <td>
-                <img th:src="${item.imageUrl}" alt="Item Image" style="width: 100px; height: 100px;">
-            </td>
-            <td style="vertical-align: middle">
-                <span th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></span>
-            </td>
-            <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.salePrice)}"></td>
-            <td style="vertical-align: middle; text-align:right" th:text="${item.inventory}"></td>
-            <td style="vertical-align: middle; text-align:center" th:if="${item.inventory != 0}">
-                    <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object = "${item}" method="POST">
-                    <button type = "submit" class = "btn btn-primary">Add to cart</button></form>
-            </td>
-            <td th:if="${item.inventory == 0}">
-                <button type = "submit" class="btn btn-primary" disabled>Out of stock</button>
-            </td>
+
+            <!-- Check if the item ID is not 13 for all user types or if the user is a MEMBER -->
+            <th:block th:if="${item.id != 13 or #authorization.expression('hasAuthority(''MEMBER'')')}">
+                <!-- Display the item -->
+                <td>
+                    <img th:src="${item.imageUrl}" alt="Item Image" style="width: 100px; height: 100px;">
+                </td>
+                <td style="vertical-align: middle">
+                    <span th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></span>
+                </td>
+                <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.salePrice)}"></td>
+                <td style="vertical-align: middle; text-align:right" th:text="${item.inventory}"></td>
+                <td style="vertical-align: middle; text-align:center">
+                    <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object="${item}" method="POST">
+                        <button type="submit" class="btn btn-primary">Add to cart</button>
+                    </form>
+                </td>
+            </th:block>
+
         </tr>
+<!--        <tr th:each="item : ${items}">-->
+<!--            <td>-->
+<!--                <img th:src="${item.imageUrl}" alt="Item Image" style="width: 100px; height: 100px;">-->
+<!--            </td>-->
+<!--            <td style="vertical-align: middle">-->
+<!--                <span th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></span>-->
+<!--            </td>-->
+<!--            <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatCurrency(item.salePrice)}"></td>-->
+<!--            <td style="vertical-align: middle; text-align:right" th:text="${item.inventory}"></td>-->
+<!--            <td style="vertical-align: middle; text-align:center" th:if="${item.inventory != 0}">-->
+<!--                    <form th:action="@{/cart/add/{id} (id=${item.id})}" th:object = "${item}" method="POST">-->
+<!--                    <button type = "submit" class = "btn btn-primary">Add to cart</button></form>-->
+<!--            </td>-->
+<!--            <td  style="vertical-align: middle; text-align:center" th:if="${item.inventory == 0}">-->
+<!--                <button type = "submit" class="btn btn-primary" disabled>Out of stock</button>-->
+<!--            </td>-->
+<!--        </tr>-->
         </tbody>
     </table>
 </div>

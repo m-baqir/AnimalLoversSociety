@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="ISO-8859-1">
     <title>Manage Items</title>
@@ -14,12 +14,26 @@
         .itemsCode-column {
             width: 105px;
         }
+
+        .sign-out {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 <body>
 
 <br>
 <div class = "container">
+    <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out" style="text-align: center">
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b><span sec:authentication="principal.username"></span></b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
     <div class = "row align-items-center justify-content-between">
     <div class = "col">
         <h1>Manage Items</h1>

@@ -24,7 +24,7 @@ CREATE TABLE `users_roles` (
 );
 
 INSERT INTO `roles` (`name`) VALUES ('EMPLOYEE');
-INSERT INTO `roles` (`name`) VALUES ('DONOR');
+INSERT INTO `roles` (`name`) VALUES ('MEMBER');
 INSERT INTO `roles` (`name`) VALUES ('MANAGEMENT');
 INSERT INTO `roles` (`name`) VALUES ('ADMIN');
 

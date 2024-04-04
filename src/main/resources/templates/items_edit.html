@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="ISO-8859-1">
     <title>Edit Items</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .sign-out {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
 <br>
 <br>
 <div class = "container">
+    <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out" style="text-align: center">
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b><span sec:authentication="principal.username"></span></b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
     <div class = "row">
         <div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class = "text-center">Edit Item</h1>
@@ -114,7 +129,7 @@
                         <button type = "submit" class = "btn btn-primary">
                             Submit
                         </button>
-                        <a href="/items/manage" class="btn btn-danger">Cancel</a>
+                        <a href="javascript:history.back()" class="btn btn-danger">Cancel</a>
                     </div>
                 </form>
             </div>
