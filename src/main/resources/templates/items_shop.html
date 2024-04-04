@@ -48,6 +48,7 @@
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
+
             <!-- Check if the item ID is not 13 for all user types or if the user is a MEMBER -->
             <th:block th:if="${item.id != 13 or #authorization.expression('hasAuthority(''MEMBER'')')}">
                 <!-- Display the item -->
@@ -65,6 +66,7 @@
                     </form>
                 </td>
             </th:block>
+
         </tr>
 <!--        <tr th:each="item : ${items}">-->
 <!--            <td>-->
