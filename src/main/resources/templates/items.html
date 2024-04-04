@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="ISO-8859-1">
     <title>Items</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .sign-out {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
 <div class="container text-center">
+    <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out">
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b><span sec:authentication="principal.username"></span></b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
     <h1>Items and Inventory</h1>
     <h3><a th:href="@{/items/inventory}">Inventory</a></h3>
     <h3><a th:href="@{/items/create}">Add new Item</a></h3>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="ISO-8859-1">
     <title>Inventory</title>
@@ -14,12 +14,24 @@
         .itemsCode-column {
             width: 105px;
         }
+        .sign-out {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 <body>
-
 <br>
 <div class = "container">
+    <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out" style="text-align: center">
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b><span sec:authentication="principal.username"></span></b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
     <div class = "row align-items-center justify-content-between">
         <div class = "col">
             <h1>Inventory</h1>
@@ -77,7 +89,8 @@
                     </div>
                     <div class="col">
                         <a th:href="@{/items/reorder/received/{id}(id=${item.id})}" onclick="return confirm('Confirm Reorder Received')">
-                            <button type="button" class="btn btn-outline-secondary btn-block">Received</button>
+                            <button th:if="${item.inventoryOnReorder == 0}" type="button" class="btn btn-success btn-block" disabled>Received</button>
+                            <button th:unless="${item.inventoryOnReorder == 0}" type="button" class="btn btn-success btn-block">Received</button>
                         </a>
                     </div>
                 </div>

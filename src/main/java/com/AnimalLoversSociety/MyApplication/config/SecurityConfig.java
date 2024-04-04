@@ -38,12 +38,19 @@ public class SecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/users").hasAuthority("ADMIN")
-                .anyRequest().permitAll()
+                        .requestMatchers("/users").hasAuthority("ADMIN")
+                        .requestMatchers("/items/**").hasAnyAuthority("ADMIN","EMPLOYEE")
+                        .requestMatchers("/employees/**").hasAuthority("ADMIN")
+                        .requestMatchers("/projects/**").hasAnyAuthority("ADMIN","EMPLOYEE")
+                        .requestMatchers("/donors/**").hasAnyAuthority("ADMIN","EMPLOYEE")
+                        .requestMatchers("/sales/**").hasAnyAuthority("ADMIN","EMPLOYEE")
+                        .requestMatchers("/seminars/**").hasAnyAuthority("ADMIN","EMPLOYEE")
+                        .requestMatchers("/shop/**").hasAnyAuthority("ADMIN","EMPLOYEE","MEMBER")
+                        .anyRequest().permitAll()
 
         )
                 .formLogin(login -> login.usernameParameter("username")
-                        .defaultSuccessUrl("/users")
+                        .defaultSuccessUrl("/", true)
                         .permitAll())
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll());
 
