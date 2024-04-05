@@ -27,15 +27,33 @@
         <label for="salary">Salary</label>
         <input type="text" id="salary" name="salary" class="form-control" required><br>
         
-        <label for="department">Department</label>
-        <input type="text" id="department" name="department" class="form-control" required><br>
+        <div class="form-group">
+            <label>Department</label>
+            <select id="department" name="department" class="form-control" required>
+                <option value="" selected>Select Department</option>
+                <option value="Production">Production</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Talent Acquisition">Talent Acquisition</option>
+                <option value="VA">VA</option>
+            </select>
+        </div>
+        <br>
         
         <label for="supervisor">Supervisor</label>
         <input type="text" id="supervisor" name="supervisor" class="form-control" required><br>
         
-        <label for="project">Project</label>
-        <input type="text" id="project" name="project" class="form-control" required><br>
+        <div class="form-group">
+            <label>Project</label>
+            <select id="project" name="project" class="form-control" required>
+                <option value="" selected>Select Project</option>
+                <option value="AGOC">AGOC</option>
+                <option value="DFAS">DFAS</option>
+                <option value="OLNO">OLNO</option>
+            </select>
+        </div>
+        <br>
         
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="submit" value="Add Employee" class="btn btn-primary">
     </form>
         </div>

@@ -30,7 +30,7 @@
         <tbody>
             <tr th:each="employee : ${employees}">
                 <td>
-                    <a th:if="${deleteMode}" th:href="@{/employees/delete/{employeeData}(employeeData=${employee.employeeData})}" th:text="${employee.employeeData}"></a>
+                    <a th:if="${deleteMode}" th:href="@{/employees/delete/{employeeData}(employeeData=${employee.employeeData})}" class="btn btn-danger btn-sm">Delete</a>
                     <span th:if="${!deleteMode}" th:text="${employee.employeeData}"></span>
                 </td>
                 <td th:text="${employee.employeeID}">ID</td>
