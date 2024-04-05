@@ -27,23 +27,6 @@ public class Customer {
     public Customer() {
     }
 
-    // Constructor with all fields
-//    public Customer(Integer customerId,
-//                    String firstName,
-//                    String lastName,
-//                    String streetAddress,
-//                    String city,
-//                    String province,
-//                    String postalCode) {
-//        this.customerId = customerId;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.streetAddress = streetAddress;
-//        this.city = city;
-//        this.province = province;
-//        this.postalCode = postalCode;
-//    }
-
     // Constructor without id (will be auto-generated)
     public Customer(String firstName,
                     String lastName,
