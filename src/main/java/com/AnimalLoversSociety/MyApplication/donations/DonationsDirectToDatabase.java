@@ -31,7 +31,7 @@ public class DonationsDirectToDatabase implements CommandLineRunner {
                 new Donations(5, 10, 700, new Date())
         ));
         System.out.println("Donation Data Saved to Database");
-        donationsRepo.deleteById(4L);
+        // donationsRepo.deleteById(4L);
         System.out.println("Test: deleted 4 from donation table");
     }
 }
