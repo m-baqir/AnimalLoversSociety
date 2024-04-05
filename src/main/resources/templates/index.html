@@ -34,6 +34,8 @@
         <h3 th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a th:href="@{/employees}">Employees</a></h3>
         <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/projects}">Projects</a></h3>
         <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/donors}">Donors</a></h3>
+          <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/donations}">Donors</a></h3>
+        <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/donors}">Donors</a></h3>
         <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/items}">Items and Inventory</a></h3>
         <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'', ''MEMBER'')')}"><a th:href="@{/shop}">Shop</a></h3>
         <h3 th:if="${#authorization.expression('hasAnyAuthority(''EMPLOYEE'', ''ADMIN'')')}"><a th:href="@{/sales}">Sales</a></h3>
