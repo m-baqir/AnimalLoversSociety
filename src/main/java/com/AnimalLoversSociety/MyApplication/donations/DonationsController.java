@@ -2,30 +2,38 @@ package com.AnimalLoversSociety.MyApplication.donations;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.Optional;
 
-@RestController
+@Controller
 public class DonationsController {
 
     @Autowired
     private DonationsRepository donationsRepo;
 
-    @GetMapping(path="/donations/all")
+    @GetMapping(path = "/donations")
+    public String donor(Model model) {
+        model.addAttribute("donations", donationsRepo.findAll());
+        return "donations";
+    }
+
+    @GetMapping(path="/donors/all")
     public Iterable<Donations> getAllDonations() { return donationsRepo.findAll(); }
 
     @GetMapping(path="/donations/all/{id}")
     public Optional<Donations> show(@PathVariable String id) {
         long donationId = Long.parseLong(id);
-        return donationsRepo.findById(donationId);
+        return donationsRepo.findById((int) donationId);
     }
 
     //Delete method is not working for some reason
     @RequestMapping(value = "/donations/del/{donationId}", method = {RequestMethod.POST, RequestMethod.GET})
     public @ResponseBody String removeDonations(@PathVariable long donationId) {
-        donationsRepo.deleteById(0L);
+        // donationsRepo.deleteById((int) 0L);
 
         return "Deleted";
     }
