@@ -56,7 +56,7 @@
         <tbody>
         <tr th:each="item : ${items}">
             <!-- Check if the item ID is not 13 for all user types or if the user is a MEMBER -->
-            <th:block th:if="${item.id != 13 or #authorization.expression('hasAuthority(''MEMBER'')')}">
+            <th:block th:if="${item.id != 13 or #authorization.expression('hasAuthority(''DONOR'')')}">
                 <!-- Display the item -->
                 <td>
                     <img th:src="${item.imageUrl}" alt="Item Image" style="width: 100px; height: 100px;">
