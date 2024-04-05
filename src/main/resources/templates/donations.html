@@ -11,6 +11,7 @@
     <div style="margin: 30px 100px;">
         <h1 style="color: blue; display: inline; margin-right: 400px;">Donations</h1>
         <a th:href="@{/donation/add}"><button class="btn btn-danger btn-lg">Make donation</button></a>
+        <a th:href="@{/}"><button class="btn btn-primary btn-lg">Return to Home Page</button></a>
     </div>
 
     <table class = "table" style="margin: 0px 100px; width: 80%;">
@@ -23,10 +24,10 @@
         </thead>
 
         <tbody>
-            <!-- <tr th:each = "donation: ${donations}">
+            <tr th:each = "donation: ${donation}">
                 <td th:text = "${donation.id}"></td>
                 <td th:text = "${donation.amount}"></td>
-                <td th:text = "${donation.date}"></td> -->
+                <td th:text = "${donation.date}"></td>
             </tr>
         </tbody>
     </table>

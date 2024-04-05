@@ -3,6 +3,8 @@ package com.AnimalLoversSociety.MyApplication.employeeseminar;
 import com.AnimalLoversSociety.MyApplication.employees.Employees;
 import com.AnimalLoversSociety.MyApplication.seminars.Seminar;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "employee_seminar")

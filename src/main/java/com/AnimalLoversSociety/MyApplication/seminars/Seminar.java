@@ -1,6 +1,6 @@
 package com.AnimalLoversSociety.MyApplication.seminars;
 
-import com.AnimalLoversSociety.MyApplication.employees.Employees;
+import com.AnimalLoversSociety.MyApplication.employeeseminar.EmployeeSeminar;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,6 +26,9 @@ public class Seminar {
     private int capacity;
     @Column(nullable = false)
     private int enrolled;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "seminar")
+    private List<EmployeeSeminar> attendance;
 
     // No-arg constructor
     public Seminar() {

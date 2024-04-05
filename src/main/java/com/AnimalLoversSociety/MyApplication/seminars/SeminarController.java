@@ -78,12 +78,5 @@ public class SeminarController {
         return "seminars_register";
     }
 
-//    @PostMapping("/seminars/register/{seminarId}")
-//    public String processRegistration(@PathVariable Integer seminarId, @ModelAttribute("seminar") Seminar seminar, Model model) {
-//        Seminar seminarForRegistration = seminarService.getSeminarById(seminarId);
-//        seminarService.incrementEnrollment(seminarForRegistration);
-//        seminarService.saveSeminar(seminarForRegistration);
-//        return "redirect:/seminars";
-//    }
 
 }
