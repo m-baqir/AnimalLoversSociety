@@ -30,7 +30,7 @@
         <tbody>
             <tr th:each="employee : ${employees}">
                 <td th:if="${modifyMode}">
-                    <a th:href="@{/employees/modify/{employeeData}(employeeData=${employee.employeeData})}" th:text="${employee.employeeData}"></a>
+                    <a th:href="@{/employees/modify/{employeeData}(employeeData=${employee.employeeData})}" class="btn btn-primary btn-sm">Modify</a>
                 </td>
                 <td th:text="${employee.employeeID}">ID</td>
                 <td th:text="${employee.employeeName}">Name</td>
