@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Controller
 public class DonationsController {
@@ -20,15 +19,32 @@ public class DonationsController {
         model.addAttribute("donations", donationsRepo.findAll());
         return "donations";
     }
+    
 
-    @GetMapping(path="/donors/all")
+    //Add
+    @GetMapping("/donation/add")
+    public String showDonationsAdd(Model model) {
+        Iterable<Donations> donations1 = donationsRepo.findAll();
+        model.addAttribute("donations", donations1);
+        return "donations_add";
+    }
+
+    @PostMapping("/donations")
+    public String saveItem(@ModelAttribute("donation") Donations donation1,
+            @RequestParam(value = "amount") String amount,
+            @RequestParam(value = "date") String date) {
+                donationsRepo.save(donation1);
+                return "redirect:/donations";
+    }
+
+    @GetMapping(path="/donations/all")
     public Iterable<Donations> getAllDonations() { return donationsRepo.findAll(); }
 
-    @GetMapping(path="/donations/all/{id}")
-    public Optional<Donations> show(@PathVariable String id) {
-        long donationId = Long.parseLong(id);
-        return donationsRepo.findById(/*(int)*/ donationId);
-    }
+    // @GetMapping(path="/donations/all/{id}")
+    // public Optional<Donations> show(@PathVariable String id) {
+    //     long donationId = Long.parseLong(id);
+    //     // return donationsRepo.findById(/*(int)*/ donationId);
+    // }
 
     //Delete method is not working for some reason
     @RequestMapping(value = "/donations/del/{donationId}", method = {RequestMethod.POST, RequestMethod.GET})
