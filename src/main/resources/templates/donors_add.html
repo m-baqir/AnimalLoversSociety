@@ -6,31 +6,41 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
-    <h1 style="color: red; margin: 30px 50px;">Add Donor</h1>
-    <form action="/donors/add" method="post" style="margin-left: 50px;">
+    <h1 style="color: red; margin: 30px 32%;">Add Donor</h1>
 
-        <label for="id">ID:</label>
-        <input type="text" id="id" name="id" required>
+    <form th:action="@{/donors}" action="/donors/add" method="post" style="width: 500px; margin-left: 25%;">
+    
+        <div class="form-group">    
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
         
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <div class="form-group">    
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" class="form-control">
+        </div>
         
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address">
+        <div class="form-group">    
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" class="form-control">
+        </div>
         
-        <label for="gender">Gender:</label>
-        <input type="text" id="gender" name="gender"><br><br>
+        <div class="form-group">    
+            <label for="donation">Donation:</label>
+            <input type="text" id="donation" name="donation" class="form-control" required>
+        </div>
         
-        <label for="donation">Donation:</label>
-        <input type="text" id="donation" name="donation" required>
+        <div class="form-group">    
+            <label for="name_change">Name change:</label>
+            <input type="text" id="name_change" name="name_change" class="form-control">
+        </div>
         
-        <label for="name_change">Name change:</label>
-        <input type="text" id="name_change" name="name_change">
+        <div class="form-group">    
+            <label for="member">Member:</label>
+            <input type="text" id="member" name="member" class="form-control">
+        </div>
         
-        <label for="member">Member:</label>
-        <input type="text" id="member" name="member"><br><br>
-        
-        <input type="submit" value="SAVE" class="btn btn-dark">
+        <input type="submit" value="SAVE" class="btn btn-primary">
 
     </form>
 </body>
