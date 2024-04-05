@@ -27,7 +27,7 @@ public class DonationsController {
     @GetMapping(path="/donations/all/{id}")
     public Optional<Donations> show(@PathVariable String id) {
         long donationId = Long.parseLong(id);
-        return donationsRepo.findById((int) donationId);
+        return donationsRepo.findById(/*(int)*/ donationId);
     }
 
     //Delete method is not working for some reason

@@ -7,13 +7,15 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <style>
+        /*sets the the column width for the action column*/
         .actions-column {
             width: 225px;
         }
-
+        /*sets the itemsCode column width*/
         .itemsCode-column {
             width: 105px;
         }
+        /*fixes the sign out function to the upper right corner of the windows*/
         .sign-out {
             position: absolute;
             top: 10px;
@@ -24,6 +26,7 @@
 <body>
 <br>
 <div class = "container">
+<!--    hides sign out function if no user is logged in-->
     <div th:if="${#authorization.expression('isAuthenticated()')}" class="sign-out" style="text-align: center">
         <form th:action="@{/logout}" method="post">
             <p>
@@ -57,11 +60,9 @@
                 <option value="Shirt">Shirts</option>
                 <option value="Sculpture">Sculptures</option>
                 <option value="Bumper Sticker">Bumper Stickers</option>
-
             </select>
         </div>
     </div>
-
     <table class = "table">
         <thead class = "thead-dark">
         <tr>
@@ -76,8 +77,10 @@
         <tbody>
         <tr th:each="item : ${items}">
             <td style="vertical-align: middle; text-align:right" th:text="${item.id}"></td>
+<!--            concatenates the name with additional descriptive data for item subclasses Shirts and Sculptures, otherwise just show the item name-->
             <td style="vertical-align: middle" th:text="${item.itemType == 'Shirt' ? item.name + ' - ' + item.colour + ' / ' + item.size : item.itemType == 'Sculpture' ? item.name + ' - ' + item.weight + 'kg / ' + item.height + '&quot;': item.name}"></td>
             <td style="vertical-align: middle; text-align:left" th:text="${item.itemType}"></td>
+<!--            formatting condition for numbers-->
             <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatDecimal(item.inventory, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
             <td style="vertical-align: middle; text-align:right" th:text="${#numbers.formatDecimal(item.inventoryOnReorder, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
             <td style="vertical-align: middle; text-align:center">
@@ -88,6 +91,7 @@
                         </a>
                     </div>
                     <div class="col">
+<!--                        if inventoryOnReorder is 0, disabled received button, else make it clickable-->
                         <a th:href="@{/items/reorder/received/{id}(id=${item.id})}" onclick="return confirm('Confirm Reorder Received')">
                             <button th:if="${item.inventoryOnReorder == 0}" type="button" class="btn btn-success btn-block" disabled>Received</button>
                             <button th:unless="${item.inventoryOnReorder == 0}" type="button" class="btn btn-success btn-block">Received</button>
@@ -99,6 +103,7 @@
         </tbody>
     </table>
 </div>
+<!--searchInput script-->
 <script>
     $(document).ready(function(){
         $("#searchInput").on("keyup", function() {
@@ -109,25 +114,16 @@
         });
     });
 </script>
-
+<!--filter table by itemType script-->
 <script>
     function filterTable() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("filterItemType");
-        filter = input.value.toUpperCase();
-        table = document.querySelector(".table");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2]; // Index 2 corresponds to Item Type column
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1 || filter === '') {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
+        const filter = document.getElementById("filterItemType").value.toUpperCase();
+        const rows = document.querySelectorAll(".table tbody tr");
+
+        rows.forEach(row => {
+            const itemType = row.cells[2].textContent.toUpperCase();
+            row.style.display = itemType.includes(filter) || filter === '' ? "" : "none";
+        });
     }
 </script>
 </body>
