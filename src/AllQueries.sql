@@ -45,20 +45,28 @@ INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (5, 4);
 -- animalloverssociety.customers definition
 
 CREATE TABLE `customers` (
-  `CustomerID` int NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(100) NOT NULL,
-  `LastName` varchar(100) NOT NULL,
-  `StreetAddress` varchar(100) NOT NULL,
-  `City` varchar(100) NOT NULL,
-  `Province` char(2) NOT NULL,
-  `PostalCode` char(6) NOT NULL,
-  PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `postal_code` varchar(255) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `street_address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO animalloverssociety.customers (CustomerID,FirstName,LastName,StreetAddress,City,Province,PostalCode) VALUES
-	 (1,'Joel','Miller','130 Yonge St','Toronto','ON','M4C1B5'),
-	 (2,'Roman','Roy','2350 Dundas St','Toronto','ON','M4B2J8'),
-	 (3,'Sydney','Adamu','1562 Granville St','Vancouver','BC','V6H3J1');
+INSERT INTO animalloverssociety.customers
+(customer_id, city, first_name, last_name, postal_code, province, street_address)
+VALUES(1, 'Toronto', 'John', 'Smith', 'M2K 1W9', 'ON', '123 Apple St');
+INSERT INTO animalloverssociety.customers
+(customer_id, city, first_name, last_name, postal_code, province, street_address)
+VALUES(2, 'Toronto', 'Amy', 'Roberts', 'M3K 0C3', 'ON', '456 Peach St');
+INSERT INTO animalloverssociety.customers
+(customer_id, city, first_name, last_name, postal_code, province, street_address)
+VALUES(3, 'Vancouver', 'Cam', 'Adams', 'V5K0A3', 'BC', '246 Orange St');
+INSERT INTO animalloverssociety.customers
+(customer_id, city, first_name, last_name, postal_code, province, street_address)
+VALUES(4, 'Vancouver', 'Claire', 'Benson', 'V5K0B5', 'BC', '357 Lemon Dr');
 
 -- animalloverssociety.items definition - AP
 
@@ -114,40 +122,47 @@ VALUES(0, 10, 2.59, 'https://i.ebayimg.com/images/g/8cQAAMXQVT9TDu5E/s-l1200.web
 -- animalloverssociety.sales definition
 
 CREATE TABLE `sales` (
-  `SaleID` int NOT NULL AUTO_INCREMENT,
-  `ProductID` int NOT NULL,
-  `Quantity` int NOT NULL,
-  `CustomerID` int NOT NULL,
-  `Date` date NOT NULL,
-  PRIMARY KEY (`SaleID`),
-  KEY `sales_customers_FK` (`CustomerID`),
-  CONSTRAINT `sales_customers_FK` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
-  KEY `sales_items_FK` (`ProductID`),
-  CONSTRAINT `sales_items_FK` FOREIGN KEY (`ProductID`) REFERENCES `items` (`itemCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `sale_id` int NOT NULL AUTO_INCREMENT,
+  `date` date DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `item_id` bigint NOT NULL,
+  PRIMARY KEY (`sale_id`),
+  KEY `FKd94vrikapjd2ews1k4lb71sfg` (`customer_id`),
+  KEY `FKql2kcxaqindu2vv9swkkpm70c` (`item_id`),
+  CONSTRAINT `FKd94vrikapjd2ews1k4lb71sfg` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
+  CONSTRAINT `FKql2kcxaqindu2vv9swkkpm70c` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO animalloverssociety.sales (SaleID,ProductID,Quantity,CustomerID,Date) VALUES
-	 (1,1,1,2,'2024-01-16'),
-	 (2,4,2,3,'2024-02-04'),
-	 (3,3,1,1,'2024-01-25');
+INSERT INTO animalloverssociety.sales
+(sale_id, `date`, quantity, customer_id, item_id)
+VALUES(1, '2024-03-03', 1, 3, 1);
+INSERT INTO animalloverssociety.sales
+(sale_id, `date`, quantity, customer_id, item_id)
+VALUES(2, '2024-03-15', 2, 4, 2);
 
 -- animalloverssociety.seminars definition
 
 CREATE TABLE `seminars` (
-  `SeminarID` int NOT NULL AUTO_INCREMENT,
-  `Title` varchar(100) NOT NULL,
-  `Date` date NOT NULL,
-  `Time` time NOT NULL,
-  `Location` varchar(100) NOT NULL,
-  `Capacity` int NOT NULL,
-  `Enrolled` int NOT NULL,
-  PRIMARY KEY (`SeminarID`)
+  `seminar_id` int NOT NULL AUTO_INCREMENT,
+  `capacity` int NOT NULL,
+  `date` date DEFAULT NULL,
+  `enrolled` int NOT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `time` time(6) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`seminar_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO animalloverssociety.seminars (Title,`Date`,`Time`,Location,Capacity,Enrolled) VALUES
-	 ('Responsible small pet ownership','2024-06-15','10:00:00','Online',100,0),
-	 ('Trap Neuter Return program','2024-05-25','14:00:00','Toronto Reference Library',50,0),
-	 ('Behavioural enrichment for dogs','2024-05-18','15:00:00','Cecil Community Centre',30,0);
+INSERT INTO animalloverssociety.seminars
+(seminar_id, capacity, `date`, enrolled, location, `time`, title)
+VALUES(1, 25, '2024-05-05', 5, 'Library', '12:00:00', 'Animal Welfare');
+INSERT INTO animalloverssociety.seminars
+(seminar_id, capacity, `date`, enrolled, location, `time`, title)
+VALUES(2, 50, '2024-06-20', 10, 'Online', '15:00:00', 'Trap Neuter Return Program');
+INSERT INTO animalloverssociety.seminars
+(seminar_id, capacity, `date`, enrolled, location, `time`, title)
+VALUES(3, 20, '2024-05-24', 1, 'Shelter', '10:00:00', 'Dog Training');
 
 -- animalloverssociety.employees definition
 
