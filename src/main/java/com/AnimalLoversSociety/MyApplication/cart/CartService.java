@@ -1,6 +1,5 @@
 package com.AnimalLoversSociety.MyApplication.cart;
 
-import com.AnimalLoversSociety.MyApplication.cartitems.CartItem;
 import com.AnimalLoversSociety.MyApplication.customers.Customer;
 import com.AnimalLoversSociety.MyApplication.customers.CustomerService;
 import com.AnimalLoversSociety.MyApplication.items.Items;

@@ -1,4 +1,4 @@
-package com.AnimalLoversSociety.MyApplication.cartitems;
+package com.AnimalLoversSociety.MyApplication.cart;
 
 import com.AnimalLoversSociety.MyApplication.items.Items;
 import jakarta.persistence.*;
