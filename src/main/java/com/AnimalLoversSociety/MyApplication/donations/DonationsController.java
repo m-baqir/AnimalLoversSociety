@@ -31,7 +31,8 @@ public class DonationsController {
 
     @PostMapping("/donations")
     public String saveItem(@ModelAttribute("donation") Donations donation1,
-            @RequestParam(value = "amount") String amount,
+            @RequestParam(value = "id") long donorID,
+            @RequestParam(value = "amount") String donationAmount,
             @RequestParam(value = "date") String date) {
                 donationsRepo.save(donation1);
                 return "redirect:/donations";
